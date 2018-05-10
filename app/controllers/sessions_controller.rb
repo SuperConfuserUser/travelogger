@@ -9,6 +9,8 @@ class SessionsController < ApplicationController
       u.email = auth['info']['email']
     end
 
+byebug
+
     session[:user_id] = @user.id
 
     redirect_to @user

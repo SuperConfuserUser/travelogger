@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  get '/auth/facebook/callback' => 'sessions#create'
+
+  get '/auth/facebook/callback', to: 'sessions#create', constraints: { protocol: /https/ }
 
 
   get 'sessions/new'
