@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :entries
   resources :trips
   resources :users, only: ['index', 'show', 'new', 'create', 'edit', 'update']
   root 'static#index'
