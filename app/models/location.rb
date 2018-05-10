@@ -1,3 +1,3 @@
 class Location < ApplicationRecord
-  belongs_to :trip
+  belongs_to :places, polymorphic: true
 end
