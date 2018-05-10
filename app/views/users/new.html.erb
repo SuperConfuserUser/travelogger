@@ -1,4 +1,7 @@
 <h2>Register</h2>
+
+<%= @user.errors.messages %>
+
 <%= form_for @user do |f| %>
 
   <%= f.text_field :username, placeholder: "Username" %>
