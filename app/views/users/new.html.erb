@@ -1,11 +1,18 @@
 <h2>Register</h2>
 
-<%= @user.errors.messages %>
+<% if @user.errors.any? %>
+  <h3>There <%= @user.errors.count == 1 ? 'was' : 'were' %> <%= pluralize(@user.errors.count, "error") %>:</h3>
+  <ol> 
+    <% @user.errors.full_messages.each do |m| %>
+      <li><%= m %></li>
+    <% end %>
+  </ol> 
+<% end %>
 
 <%= form_for @user do |f| %>
 
   <%= f.text_field :username, placeholder: "Username" %>
-  <%= f.email_field :email, placeholder: "Email" %>
+  <%= f.email_field :email, placeholder: "Email (optional)" %>
   <%= f.password_field :password, placeholder: "Password" %>
   <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>
 
