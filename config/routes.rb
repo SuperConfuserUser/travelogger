@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  root 'static#index'
-  get 'static/index'
+  
+  get '/auth/facebook/callback' => 'sessions#create'
+
+
+  get 'sessions/new'
+  get 'sessions/create'
+  get 'sessions/destroy'
 
   resources :entries
   resources :trips
   resources :users, only: ['index', 'show', 'new', 'create', 'edit', 'update']
+
+  get 'static/index'
+  root 'static#index'
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

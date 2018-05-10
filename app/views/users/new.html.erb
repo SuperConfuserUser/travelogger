@@ -11,18 +11,18 @@
   </ul> 
 <% end %>
 
-<%= link_to "Continue with Facebook", "omniauth magic" %>
+<%= link_to "Continue with Facebook", "/auth/facebook" %>
 
 <br> <br> or <br><br>
 <!-- create partial for reuse in edit_user -->
 
 <%= form_for @user do |f| %>
 
-  <%= f.text_field :username, placeholder: "Username" %> <br>
-  <%= f.email_field :email, placeholder: "Email (optional)" %> <br>
-  <%= f.password_field :password, placeholder: "Password" %> <br>
-  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> <br>
-
+  <%= f.text_field :username, placeholder: "Username" %> 
+  <%= f.email_field :email, placeholder: "Email (optional)" %> 
+  <%= f.password_field :password, placeholder: "Password" %> 
+  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> 
+  <br>
   <%= f.submit "Register" %>
 <% end %>
 
