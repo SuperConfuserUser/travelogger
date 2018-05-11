@@ -21,12 +21,12 @@
 
 <%= form_for @user do |f| %>
 
-  <%= f.text_field :username, placeholder: "Username" %> 
-  <%= f.email_field :email, placeholder: "Email" %> 
-  <%= f.password_field :password, placeholder: "Password" %> 
-  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> 
+  <%= f.text_field :username, placeholder: "Username", required: true %> 
+  <%= f.email_field :email, placeholder: "Email", required: true %> 
+  <%= f.password_field :password, placeholder: "Password", required: true %> 
+  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", required: true %> 
   <br>
   <%= f.submit "Register" %>
 <% end %>
 
-<p>Already a member? <%= link_to "Log in.", '/home/#login' %></p>
+<p>Already a member? <%= link_to "Log in.", login_path %></p>
