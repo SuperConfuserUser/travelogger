@@ -2,13 +2,16 @@
 
 <!-- create into a validation_errors(object) helper -->
 
-<% if @user.errors.any? %>
-  <h3>There <%= @user.errors.count == 1 ? 'was' : 'were' %> <%= pluralize(@user.errors.count, "error") %>:</h3>
+<% if @user.errors.any? || flash[:alert] %>
+  <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
   <ul> 
     <% @user.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
-  </ul> 
+    <% if flash[:alert] %>
+      <li><%= flash[:alert] %></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <%= link_to "Continue with Facebook", "/auth/facebook" %>
@@ -19,7 +22,7 @@
 <%= form_for @user do |f| %>
 
   <%= f.text_field :username, placeholder: "Username" %> 
-  <%= f.email_field :email, placeholder: "Email (optional)" %> 
+  <%= f.email_field :email, placeholder: "Email" %> 
   <%= f.password_field :password, placeholder: "Password" %> 
   <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> 
   <br>
