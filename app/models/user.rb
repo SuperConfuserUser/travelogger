@@ -29,15 +29,16 @@ class User < ApplicationRecord
   end
 
   def self.login(user_hash)
-    # user = User.find_by(email: user_hash[:email]) || User.new(email: user_hash[:email])
     user = User.find_or_create_by(email: user_hash[:email])
-    user.alerts << "Couldn't find an account with that email." if user.invalid?
+   
+    auth = user.authenticate(user_hash[:password]) if user.valid? 
+    user.password = user_hash[:password] if !auth
 
-    #can use "try" here
-    auth = user.authenticate(user_hash[:password]) if user.valid?
-    user.alerts << "The password didn't match." if !auth
-        
-    #delete user.errors[:username] or "Username can't be blank"
+    user.errors.add(:email, "didn't match any existing accounts") if user.invalid? && user_hash[:email].present?
+    user.errors.add(:password, "didn't match") if !auth && user_hash[:password].present?
+    user.errors.add(:password, "can't be blank") if !user.errors[:password].any? && !user_hash[:password].present?
+    user.errors[:username].clear
+
     return user
   end
 
