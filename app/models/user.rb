@@ -42,8 +42,8 @@ class User < ApplicationRecord
     return user
   end
 
-  def alerts
-    @alerts ||= self.errors.full_messages
-  end
+  # def alerts
+  #   @alerts ||= self.errors.full_messages
+  # end
 
 end

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   get '/auth/facebook/callback', to: 'sessions#create', constraints: { protocol: /https/ }
 
-  get 'register', to: 'users#new'
+  get 'signup', to: 'users#new'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
