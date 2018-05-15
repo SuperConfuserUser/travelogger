@@ -1,4 +1,5 @@
 <!-- create into a validation_errors(object) helper -->
+<h2>Log In</h2>
 
 <% if @user.errors.any? || flash[:alert] %>
   <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
@@ -12,12 +13,13 @@
   </ul>
 <% end %>
 
-<%= form_for @user, url: login_path do |f| %>
+<%= form_for @user, url: login_path, method: :post do |f| %>
 
-  <%= f.text_field :username, placeholder: "Username"%> 
   <%= f.email_field :email, placeholder: "Email" %> 
   <%= f.password_field :password, placeholder: "Password" %> 
   <br>
   <%= f.submit 'Log in' %>
 <% end %>
+
+<p>Don't have an account? <%= link_to "Register.", register_path %></p>
 
