@@ -24,16 +24,17 @@ class User < ApplicationRecord
     #   #can also bypass validations with 
     #   user.save(validate: false)
     # end
-
+    
     return user
   end
 
   def self.login(user_hash)
-    user = User.find_by(email: user_hash[:email]) || User.new(email: user_hash[:email])
+    # user = User.find_by(email: user_hash[:email]) || User.new(email: user_hash[:email])
+    user = User.find_or_create_by(email: user_hash[:email])
     user.alerts << "Couldn't find an account with that email." if user.invalid?
 
     auth = user.authenticate(user_hash[:password]) if user.valid?
-    user.alerts << "The password didn't work." if !auth
+    user.alerts << "The password didn't match." if !auth
         
     return user
   end
