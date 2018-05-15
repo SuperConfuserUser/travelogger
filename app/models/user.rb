@@ -33,14 +33,16 @@ class User < ApplicationRecord
     user = User.find_or_create_by(email: user_hash[:email])
     user.alerts << "Couldn't find an account with that email." if user.invalid?
 
+    #can use "try" here
     auth = user.authenticate(user_hash[:password]) if user.valid?
     user.alerts << "The password didn't match." if !auth
         
+    #delete user.errors[:username] or "Username can't be blank"
     return user
   end
 
   def alerts
-    @alerts ||= []
+    @alerts ||= self.errors.full_messages
   end
 
 end
