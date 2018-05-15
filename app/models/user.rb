@@ -8,16 +8,13 @@ class User < ApplicationRecord
 
 
   def self.find_or_create_by_omniauth(auth_hash)
-    user = find_by(uid: auth_hash['uid'])
-
-    if !user
-      user = User.create(
-        uid: auth_hash['uid'],
-        username: auth_hash['info']['name'],
-        email: auth_hash['info']['email'],
-        password: SecureRandom.hex
-      )
+    user = User.find_or_create_by(uid: auth_hash['uid']) do |u|
+        u.username =  auth_hash['info']['name']
+        u.email =  auth_hash['info']['email']
+        u.password =  SecureRandom.hex
     end
+
+    # user = User.find_by(uid: auth_hash['uid'])
 
     # if !user
     #   user = User.new
