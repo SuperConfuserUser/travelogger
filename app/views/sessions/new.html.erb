@@ -13,6 +13,10 @@
   </ul>
 <% end %>
 
+<%= link_to "Log in with Facebook", "/auth/facebook" %>
+
+<br> <br> or <br><br>
+
 <%= form_for @user, url: login_path, method: :post do |f| %>
 
   <%= f.email_field :email, placeholder: "Email" %> 
