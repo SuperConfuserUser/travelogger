@@ -24,6 +24,8 @@ class User < ApplicationRecord
     #   #can also bypass validations with 
     #   user.save(validate: false)
     # end
+
+    user.errors.add(:base, "Something went wrong with using your Facebook account") if user.invalid?
     
     return user
   end
