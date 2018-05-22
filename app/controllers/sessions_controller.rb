@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   def new
+    #saves the entered data if it needs to re-render the page
     @user = User.new
   end
 
