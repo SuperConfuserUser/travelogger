@@ -11,11 +11,16 @@
 
   <body>
 
-  <% if logged_in? %>
-    <p>Status: Logged in</p>
+      <% if flash[:alert] %>
+        <h3>Alert:</h3>
+        <p><%= flash[:alert] %></p>
+      <% end %>
 
-    <%= link_to "Log Out", logout_path, method: :delete %>
-  <% end %>
+  <% if logged_in? %>
+    <p>Status: Logged in
+      
+    <%= link_to "Log Out", logout_path, method: :delete %> </p>
+  <% end %> <br> <br>
 
     <%= yield %>
   </body>
