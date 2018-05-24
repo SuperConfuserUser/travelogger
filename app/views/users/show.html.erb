@@ -1,1 +1,5 @@
-Hi, <%= @user.username %>!
+<% if @user == current_user %>
+  Hi, <%= @user.username %>!
+<% else %>
+  <h1><%= @user.username %></h1>
+<% end %>
