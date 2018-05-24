@@ -6,11 +6,17 @@ class User < ApplicationRecord
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
+  before_save :default_values
+
+  def default_values
+    self.image ||= "default_profile.png"
+  end
 
   def self.find_or_create_by_omniauth(auth_hash)
     user = self.where(uid: auth_hash[:uid]).first_or_create do |u|
       u.username =  auth_hash[:info][:name]
       u.email =  auth_hash[:info][:email]
+      u.image = auth_hash[:info][:image]
       u.password =  SecureRandom.hex
     end
 
