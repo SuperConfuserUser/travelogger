@@ -1,0 +1,10 @@
+<h1>The Places We Have Been</h1>
+
+<ul>
+<% @trips.each do |trip| %>
+  <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", trip %></li>
+<% end %>
+</ul>
+
+
+<!-- <%= image_tag("default_profile.png", size: "50x50") %> -->

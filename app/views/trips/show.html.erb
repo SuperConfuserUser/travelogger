@@ -1,0 +1,9 @@
+<%= image_tag @trip.user.image, size: "50x50" %>
+
+<% if @trip.user == current_user %>
+  <%= link_to "Edit", edit_user_path(current_user) %>
+<% end %>
+  <h1><%= @trip.name%></h1>
+
+
+

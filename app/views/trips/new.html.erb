@@ -1,0 +1,27 @@
+<h2>New Travelog</h2>
+<%= form_for @trip do |f| %>
+
+  <%= f.text_field :name, placeholder: "Name" %>
+  <%= f.text_field :start_date, placeholder: "Start" %>
+  <%= f.text_field :end_date, placeholder: "End" %>
+  <%= f.text_area :note, placeholder: "Note" %>
+
+  <br>
+
+  <h3>Trip Categories</h3>
+  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name %>
+
+  <%= f.submit "Create"%>
+<% end %>
+
+
+<!-- create_table "trips", force: :cascade do |t|
+name
+ "start_date"
+ "end_date"
+ "note"
+ "user_id"
+
+ trip_categories
+
+end -->

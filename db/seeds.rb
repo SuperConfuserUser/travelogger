@@ -5,3 +5,8 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+
+trip_purpose = %w(business holiday event activity visiting other)
+
+trip_purpose.each {|cat| Purpose.create(name: cat)}
