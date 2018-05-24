@@ -16,12 +16,19 @@
         <p><%= flash[:alert] %></p>
       <% end %>
 
-  <% if logged_in? %>
-    <p>Status: Logged in
-      
-    <%= link_to "Log Out", logout_path, method: :delete %> </p>
-  <% end %> <br> <br>
 
+    <%= link_to "Travelogues", trips_path %>
+    <%= link_to "Travellers", users_path %>
+  <% if logged_in? %>
+    <%= link_to "#{current_user.username}", user_path(current_user) %>
+    <%= link_to "Log Out ", logout_path, method: :delete %>
+  <% else %> <br> <br>
+    <%= link_to "Sign up", signup_path %>
+    <%= link_to "Log in", login_path %>
+  <% end %> 
+  
+  <br><br>
+  
     <%= yield %>
   </body>
 </html>

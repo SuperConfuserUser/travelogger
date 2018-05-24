@@ -1,5 +1,8 @@
 <% if @user == current_user %>
-  Hi, <%= @user.username %>!
+  Hi, <%= @user.username %>! <%= link_to "Edit account", edit_user_path(current_user) %>
 <% else %>
   <h1><%= @user.username %></h1>
 <% end %>
+
+trip count
+<!-- list user's trips add edit option if trip.user == current_user -->
