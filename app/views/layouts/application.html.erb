@@ -17,7 +17,7 @@
       <% end %>
 
 
-    <%= link_to "Travelogues", trips_path %>
+    <%= link_to "Trips", trips_path %>
     <%= link_to "Travellers", users_path %>
   <% if logged_in? %>
     <%= link_to "#{current_user.username}", user_path(current_user) %>

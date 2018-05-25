@@ -1,17 +1,25 @@
-<h2>New Travelog</h2>
+<h2>New Trip</h2>
 <%= form_for @trip do |f| %>
 
-  <%= f.text_field :name, placeholder: "Name" %>
-  <%= f.text_field :start_date, placeholder: "Start" %>
-  <%= f.text_field :end_date, placeholder: "End" %>
+  <%= f.text_field :name, placeholder: "Name" %> <br>
+  <!-- <%= f.text_field :start_date, placeholder: "Start" %>
+  <%= f.text_field :end_date, placeholder: "End" %> -->
+
+  <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
+
+  <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> <br><br>
+
+  <br><br>
   <%= f.text_area :note, placeholder: "Note" %>
 
-  <br>
+  <br><br>
 
-  <h3>Trip Categories</h3>
+  <%= f.label :trip_categories %> <br>
   <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name %>
 
-  <%= f.submit "Create"%>
+  <br><br>
+
+  <%= f.submit %>
 <% end %>
 
 
