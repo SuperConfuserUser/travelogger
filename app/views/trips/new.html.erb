@@ -37,8 +37,8 @@
   <br><br>
 
     
-  <!-- <%= f.label :trip_categories %> <br>
-  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name %> -->
+  <%= f.label :trip_categories %> <br>
+  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name, include_hidden: false %>
 
   <br><br>
 
