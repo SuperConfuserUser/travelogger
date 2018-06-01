@@ -1,34 +1,47 @@
 <h2>New Trip</h2>
+
+<% if @trip.errors.any? || flash[:alert] %>
+  <h3>There <%= @trip.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@trip.errors.any? ? @trip.errors.count : '1', "error") %>:</h3>
+  <ul> 
+    <% @trip.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    <% if flash[:alert] %>
+      <li><%= flash[:alert] %></li>
+    <% end %>
+  </ul>
+<% end %>
+
 <%= form_for @trip do |f| %>
 
-  <%= f.text_field :name, placeholder: "Name" %> <br>
-<br>
+  <%= f.text_field :name, placeholder: "Name" %> 
+  
+  <br><br>
+
+  <%= f.fields_for :locations do |location_form| %>
+    <%= location_form.text_field :name, placeholder: "Location" %>
+  <% end %>
+
+<br><br>
 
   <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
 
   <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> <br><br>
 
+  
+
+  <br><br>
+
   <%= f.text_area :note, placeholder: "Note" %>
 
   <br><br>
 
-  <%= f.label :trip_categories %> <br>
-  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name %>
+    
+  <!-- <%= f.label :trip_categories %> <br>
+  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name %> -->
 
   <br><br>
 
-
   <%= f.submit %>
+
 <% end %>
-
-
-<!-- create_table "trips", force: :cascade do |t|
-name
- "start_date"
- "end_date"
- "note"
- "user_id"
-
- trip_categories
-
-end -->

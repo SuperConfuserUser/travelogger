@@ -10,15 +10,20 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    @trip.locations.build 
   end
 
   def create
-    @trip = Trip.create(trip_params)
-    if @trip.valid?
+    @trip = Trip.new(trip_params)
+    @trip.user = current_user
+
+    if @trip.save
       redirect_to @trip
     else
+      # @trip.locations.build
       render :new
     end
+    
   end
 
   def edit
@@ -37,7 +42,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, trip_categories:[])
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, trip_categories:[], location_attributes: [:id, :name, :_destroy])
   end
   
 end
