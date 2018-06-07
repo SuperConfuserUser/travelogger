@@ -4,14 +4,20 @@ class Trip < ApplicationRecord
   has_many :categories, through: :trip_categories
   has_many :entries
   has_many :locations, as: :place
-  accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: proc {|attributes| attributes['id'].blank?}
+  accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: proc {|attributes| attributes['name'].blank?}
 
   validates :name, presence: true
+  validate :has_a_location
   validates :start_date, presence: true
   validate :end_date_not_before_start_date
   validate :has_a_category
 
   
+  def has_a_location
+    if locations.none?
+      errors.add(:locations, "can't be blank")
+    end
+  end
 
   def end_date_not_before_start_date
     if start_date.present? && end_date.present? && start_date > end_date
@@ -27,7 +33,7 @@ class Trip < ApplicationRecord
   end
 
   def has_a_category
-    if category_ids.count < 1
+    if category_ids.none?
       errors.add(:categories, "need to be chosen")
     end
   end
