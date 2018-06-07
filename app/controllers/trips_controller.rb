@@ -17,7 +17,7 @@ class TripsController < ApplicationController
     @trip = current_user.trips.build(trip_params)
 
     if added_location? || !@trip.save
-      @trip.locations.build
+      @trip.locations.build if added_location?
       render :new
     else
       redirect_to @trip
