@@ -6,7 +6,7 @@ class CreateTrips < ActiveRecord::Migration[5.2]
       t.datetime :end_date
       t.text :note
       t.references :user, foreign_key: true
-
+    
       t.timestamps
     end
   end

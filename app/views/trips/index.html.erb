@@ -1,5 +1,7 @@
 <h1>The Places We Have Been</h1>
 
+<%= link_to "Add Trip", new_trip_path %>
+
 <ul>
 <% @trips.each do |trip| %>
   <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", trip %></li>

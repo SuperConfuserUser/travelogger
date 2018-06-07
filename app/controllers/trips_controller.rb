@@ -16,11 +16,11 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-
+byebug
     if @trip.save
       redirect_to @trip
     else
-      # @trip.locations.build
+      @trip.locations.build
       render :new
     end
     

@@ -9,4 +9,4 @@
 
 trip_purpose = %w(business holiday event activity visiting other)
 
-trip_purpose.each {|cat| Purpose.create(name: cat)}
+trip_purpose.each {|purpose| Purpose.create(name: purpose)}

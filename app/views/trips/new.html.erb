@@ -22,13 +22,11 @@
     <%= location_form.text_field :name, placeholder: "Location" %>
   <% end %>
 
-<br><br>
+  <br><br>
 
   <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
 
-  <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> <br><br>
-
-  
+  <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> 
 
   <br><br>
 
