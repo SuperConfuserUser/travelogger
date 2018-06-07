@@ -1,7 +1,7 @@
 class Trip < ApplicationRecord
   belongs_to :user
   has_many :trip_categories
-  has_many :purposes, through: :trip_categories
+  has_many :categories, through: :trip_categories
   has_many :entries
   has_many :locations, as: :place
   accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: proc {|attributes| attributes['name'].blank?}
@@ -15,6 +15,13 @@ class Trip < ApplicationRecord
   def end_date_not_before_start_date
     if start_date.present? && end_date.present? && start_date > end_date
       errors.add(:end_date, "can't be before the start date")
+    end
+  end
+
+  def category=(ids)
+    ids.each do |id|
+      category = Category.find(id)
+      self.category << category
     end
   end
 

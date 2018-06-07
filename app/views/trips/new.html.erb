@@ -20,25 +20,26 @@
 
   <%= f.fields_for :locations do |location_form| %>
     <%= location_form.text_field :name, placeholder: "Location" %>
-  <% end %>
+  <% end %> (multiple locations can be added later)
 
   <br><br>
 
   <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
 
-  <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> 
+  <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> (end date optional)
 
   <br><br>
 
-  <%= f.text_area :note, placeholder: "Note" %>
+  <%= f.text_area :note, placeholder: "Note (optional)" %>
 
   <br><br>
 
     
-  <%= f.label :trip_categories %> <br>
-  <%= f.collection_check_boxes :trip_categories, Purpose.all, :id, :name, include_hidden: false %>
+  <%= f.label :categories %> <br>
+  <%= f.collection_check_boxes :categories, Category.all, :id, :name, include_hidden: false %>
 
   <br><br>
+
 
   <%= f.submit %>
 

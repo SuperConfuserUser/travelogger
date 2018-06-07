@@ -14,9 +14,8 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.new(trip_params)
-    @trip.user = current_user
-byebug
+    @trip = current_user.trips.build(trip_params)
+
     if @trip.save
       redirect_to @trip
     else
@@ -42,7 +41,7 @@ byebug
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, trip_categories:[], location_attributes: [:id, :name, :_destroy])
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, purpose: [], location_attributes: [:id, :name, :_destroy])
   end
   
 end
