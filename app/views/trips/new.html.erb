@@ -20,7 +20,7 @@
 
   <%= f.fields_for :locations do |location_form| %>
     <%= location_form.text_field :name, placeholder: "Location" %>
-  <% end %> (multiple locations can be added later)
+  <% end %> <%= f.submit "+" %> (fill in location before adding more)
 
   <br><br>
 

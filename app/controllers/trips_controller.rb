@@ -16,11 +16,11 @@ class TripsController < ApplicationController
   def create
     @trip = current_user.trips.build(trip_params)
 
-    if @trip.save
-      redirect_to @trip
-    else
+    if added_location? || !@trip.save
       @trip.locations.build
       render :new
+    else
+      redirect_to @trip
     end
     
   end
@@ -42,6 +42,10 @@ class TripsController < ApplicationController
 
   def trip_params
     params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy])
+  end
+
+  def added_location?
+    params[:commit] == "+"
   end
   
 end
