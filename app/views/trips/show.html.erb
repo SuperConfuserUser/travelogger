@@ -1,9 +1,21 @@
-<%= image_tag @trip.user.image, size: "50x50" %>
+<%= image_tag @trip.user.image, size: "50x50" %> <%= @trip.user.username %>
 
-<% if @trip.user == current_user %>
-  <%= link_to "Edit", edit_user_path(current_user) %>
+<h1><%= @trip.name %></h1>
+
+<%= "Location".pluralize(@trip.locations.count) + ": " + @trip.locations.pluck('name').join(', ') %>
+
+<br>
+
+Date: <%= @trip.start_date.strftime("%B %e, %Y") %> <%= "to " + @trip.end_date.strftime("%B %e, %Y") if @trip.end_date %>
+
+
+<br>
+
+<%= "Type".pluralize(@trip.locations.count) + ": " +  @trip.categories.pluck('name').map { |name| name.capitalize }.join(', ') %>
+
+<p><%= @trip.note %></p>
+
+<% if current_user == @trip.user %>
+  <%= link_to "Edit", edit_trip_path(@trip) %> <%= link_to "Delete" %>
+
 <% end %>
-  <h1><%= @trip.name%></h1>
-
-
-

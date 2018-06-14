@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit]
 
   def index
-    @trips = Trip.all
+    @trips = Trip.all.reverse
   end
 
   def show

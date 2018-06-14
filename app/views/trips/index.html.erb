@@ -4,7 +4,7 @@
 
 <ul>
 <% @trips.each do |trip| %>
-  <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", trip %></li>
+  <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", trip %> on <%= trip.start_date.strftime("%B %e, %Y") %></li>
 <% end %>
 </ul>
 
