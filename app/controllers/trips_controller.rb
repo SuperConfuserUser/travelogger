@@ -2,19 +2,24 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit]
 
   def index
-    @trips = Trip.all.reverse
+    if params[:user_id] 
+      @trips = User.find(params[:user_id]).trips
+    else
+      @trips = Trip.all.reverse
+    end
   end
 
   def show
   end
 
   def new
-    @trip = Trip.new
+    @trip = Trip.new(user_id: params[:user_id])
     @trip.locations.build 
   end
 
   def create
-    @trip = current_user.trips.build(trip_params)
+    # @trip = current_user.trips.build(trip_params)
+    # @trip = Trip.new(trip_params)
 
     if added_location? || !@trip.save
       @trip.locations.build if added_location?
@@ -22,7 +27,6 @@ class TripsController < ApplicationController
     else
       redirect_to @trip
     end
-    
   end
 
   def edit
@@ -41,7 +45,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy])
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy], :user_id)
   end
 
   def added_location?

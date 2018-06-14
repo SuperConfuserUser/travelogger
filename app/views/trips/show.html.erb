@@ -1,4 +1,4 @@
-<%= image_tag @trip.user.image, size: "50x50" %> <%= @trip.user.username %>
+<%= image_tag @trip.user.image, size: "50x50" %> <%= link_to @trip.user.username, user_path(@trip.user) %>
 
 <h1><%= @trip.name %></h1>
 

@@ -14,6 +14,8 @@
 
 <%= form_for @trip do |f| %>
 
+  <%= f.hidden_field :user_id %>
+
   <%= f.text_field :name, placeholder: "Name" %> 
   
   <br><br>
