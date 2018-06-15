@@ -26,7 +26,8 @@
 
   <br><br>
 
-  <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
+  <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year]
+  %> to 
 
   <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> (end date optional)
 
@@ -40,9 +41,17 @@
   <%= f.label :categories %> <br>
   <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
 
+  <!-- 
+    allow user to create custom category use find or create in the text field, this shouldn't be another checkbox
+    
+    <%= f.fields_for :categories, @trip.categories.build do |categories_fields| %>
+    <%= categories_fields.text_field :name, placeholder: "Custom Category" %>
+  <% end %> -->
+
   <br><br>
 
 
   <%= f.submit %>
 
 <% end %>
+

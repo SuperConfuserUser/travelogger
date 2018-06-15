@@ -16,7 +16,7 @@ class TripsController < ApplicationController
     if !user_id
       redirect_to users_path, alert: "User not found."
     else
-      @trip = Trip.new(user_id: user_id)
+      @trip = Trip.new(user_id: user_id, start_date: Date.today)
       @trip.locations.build 
     end
   end
@@ -72,7 +72,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy])
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], categories_attributes: [:name], locations_attributes: [:id, :name, :_destroy])
   end
 
   def added_location?

@@ -6,6 +6,7 @@ class Trip < ApplicationRecord
   has_many :locations, as: :place
 
   accepts_nested_attributes_for :locations, :allow_destroy => true 
+  accepts_nested_attributes_for :categories, reject_if: :all_blank
 
   validates :name, presence: true
   validate :has_location?
