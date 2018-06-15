@@ -16,6 +16,6 @@ Date: <%= @trip.start_date.strftime("%B %e, %Y") %> <%= "to " + @trip.end_date.s
 <p><%= @trip.note %></p>
 
 <% if current_user == @trip.user %>
-  <%= link_to "Edit", edit_user_trip_path(@trip.user, @trip) %> <%= link_to "Delete" %>
+  <%= link_to "Edit", edit_user_trip_path(@trip.user, @trip) %> <%= link_to "Delete", @trip, method: :delete, data: { confirm: "Are you sure?" } %>
 
 <% end %>

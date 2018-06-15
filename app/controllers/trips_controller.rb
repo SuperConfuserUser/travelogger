@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit, :update]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def index
     if params[:user_id] 
@@ -57,6 +57,12 @@ class TripsController < ApplicationController
   end
 
   def destroy
+    if current_user == @trip.user
+      @trip.destroy
+      redirect_to user_trips_path(current_user), alert: "Trip deleted."
+    else
+      redirect_to trips_path(@trip), alert: "Not allowed."
+    end
   end
 
   private
