@@ -13,13 +13,13 @@ class TripsController < ApplicationController
   end
 
   def new
-    @trip = Trip.new(user_id: params[:user_id])
+    user_id = params[:user_id] || current_user.id 
+    @trip = Trip.new(user_id: user_id)
     @trip.locations.build 
   end
 
   def create
-    # @trip = current_user.trips.build(trip_params)
-    # @trip = Trip.new(trip_params)
+    @trip = Trip.new(trip_params)
 
     if added_location? || !@trip.save
       @trip.locations.build if added_location?
@@ -45,7 +45,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy], :user_id)
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], locations_attributes: [:id, :name, :_destroy])
   end
 
   def added_location?
