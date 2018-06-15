@@ -26,7 +26,8 @@
 
   <br><br>
 
-  <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> to 
+  <%= f.date_field :start_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year], value: Date.today.to_s(:db)
+  %> to 
 
   <%= f.date_field :end_date, start_year: Date.today.year - 25, end_year: Date.today.year, order: [:month, :day, :year] %> (end date optional)
 
@@ -38,7 +39,7 @@
 
     
   <%= f.label :categories %> <br>
-  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
 
   <br><br>
 

@@ -38,7 +38,7 @@
 
     
   <%= f.label :categories %> <br>
-  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, include_hidden: false %>
+  <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
 
   <br><br>
 
