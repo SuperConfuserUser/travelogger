@@ -7,10 +7,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy' #should this be post instead?
 
-  resources :entries
-  resources :trips
-  resources :users, only: ['index', 'show', 'new', 'create', 'edit', 'update'] do
-    resources :trips
+  resources :trips, only: [:index, :show, :create, :update, :destroy]
+  resources :users, only: [:index, :show, :new, :create, :edit, :update] do
+    resources :trips, only: [:index, :show,  :new, :edit]
   end
 
   root 'static#index'

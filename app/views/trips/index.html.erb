@@ -1,6 +1,6 @@
 <h1>The Places We Have Been</h1>
 
-<%= link_to "Add Trip", new_trip_path() %>
+<%= link_to "Add Trip", new_user_trip_path(current_user) if logged_in? %>
 
 <ul>
 <% @trips.each do |trip| %>

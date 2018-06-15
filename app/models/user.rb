@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :trips
+  has_many :locations, through: :trips
   validates_associated :trips
 
   has_secure_password
@@ -7,6 +8,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
 
   before_save :default_values
+
+  # INITIALIZATIONS AND VALIDATIONS
 
   def default_values
     self.image ||= "default_profile.png"
@@ -39,4 +42,7 @@ class User < ApplicationRecord
     return user
   end
 
+  # CUSTOM
+
+  
 end

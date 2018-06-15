@@ -1,9 +1,9 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: [:show, :edit]
+  before_action :set_trip, only: [:show, :edit, :update]
 
   def index
     if params[:user_id] 
-      @trips = User.find(params[:user_id]).trips
+      @trips = find_user.trips
     else
       @trips = Trip.all.reverse
     end
@@ -13,9 +13,12 @@ class TripsController < ApplicationController
   end
 
   def new
-    user_id = params[:user_id] || current_user.id 
-    @trip = Trip.new(user_id: user_id)
-    @trip.locations.build 
+    if !user_id
+      redirect_to users_path, alert: "User not found."
+    else
+      @trip = Trip.new(user_id: user_id)
+      @trip.locations.build 
+    end
   end
 
   def create
@@ -30,9 +33,27 @@ class TripsController < ApplicationController
   end
 
   def edit
+    if params[:user_id]
+      find_user
+      if !find_user
+        redirect_to trips_path, alert: "User not found."
+      elsif @trip.nil?
+        redirect_to user_trips_path(@user), alert: "Trip not found."
+      end
+      if find_user != current_user
+        redirect_to :back, alert: "Not allowed."
+      end
+    end
   end
-
+    
   def update
+    @trip.update(trip_params)
+
+    if @trip.save
+      redirect_to @trip
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -41,7 +62,7 @@ class TripsController < ApplicationController
   private
 
   def set_trip
-    @trip = Trip.find(params[:id])
+    @trip = Trip.find_by(id: params[:id])
   end
 
   def trip_params
@@ -50,6 +71,15 @@ class TripsController < ApplicationController
 
   def added_location?
     params[:commit] == "+"
+  end
+
+  def find_user
+    @user = User.find_by(id: params[:user_id])
+  end
+
+  def user_id
+    #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
+    params[:user_id] || current_user.id 
   end
   
 end

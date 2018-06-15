@@ -4,9 +4,17 @@
   <%= link_to "Edit account", edit_user_path(current_user) %>
 <% end %>
 
-  <h1><%= @user.username %></h1>
-  <p>Been there. Done that.</p>
-  <%= link_to pluralize(@user.trips.count, 'Trip'), user_trips_path(@user) %> 
+<h1><%= @user.username %></h1>
+<p>Been there. Done that.</p>
+
+<h2><%= link_to pluralize(@user.trips.count, 'Trip'), user_trips_path(@user) %></h2>
 
 <!-- list user's trips add edit option if trip.user == current_user -->
 
+<h2>Places</h2>
+
+<ul>
+  <% @user.locations.each do |location| %>
+    <li><%= location.name %></li>
+  <% end %>
+</ul>
