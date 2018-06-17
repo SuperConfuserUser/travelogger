@@ -16,6 +16,8 @@ class Trip < ApplicationRecord
 
   # Use this instead of "reject_if: proc {|attributes| attributes['name'].blank?}" or "reject_if: :all_blank" to be able to create multiple blank fields for form input. Otherwise, user has to fill field, then add one by one
   before_save :reject_blank_locations!
+
+  #VALIDATIONS
   
   def has_location?
     named_locations = locations.count { |location| location.name.present? }
@@ -42,4 +44,16 @@ class Trip < ApplicationRecord
     end
   end
 
+  #SCOPE
+
+  scope :by_newest, -> { order('created_at desc') }
+  scope :by_oldest, -> { order('created_at asc') }
+
+  # scope :appetizers, -> { where(post.category.name => "Appetizers")}
+  scope :business, -> {joins(:trip_category).where(:categories =>
+      {:name => 'business'})}
+
+  def categorized_as(category_name)
+    categories.any?{ |c| c.name == category_name }
+  end
 end

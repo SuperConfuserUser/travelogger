@@ -5,4 +5,6 @@ class Category < ApplicationRecord
   def formatted_name
     name.capitalize
   end
+
+  scope :business, -> { where(name: 'business') }
 end
