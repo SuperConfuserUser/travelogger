@@ -49,11 +49,17 @@ class Trip < ApplicationRecord
   scope :by_newest, -> { order('created_at desc') }
   scope :by_oldest, -> { order('created_at asc') }
 
-  # scope :appetizers, -> { where(post.category.name => "Appetizers")}
-  scope :business, -> {joins(:trip_category).where(:categories =>
-      {:name => 'business'})}
+  scope :by_category, -> (category_name) { joins(:categories).where('categories.name' => category_name) }
 
-  def categorized_as(category_name)
-    categories.any?{ |c| c.name == category_name }
-  end
+  
+  # examples used to build out a fancy scope
+    # succ = ->(x) { x + 1 }
+    # succ = lambda { |x| x + 1 }
+
+    # Student.joins(:schools).where(schools: { category: 'public' })
+    # Student.joins(:schools).where('schools.category' => 'public' )
+
+    # scope :news, -> { where(:categories => '{news}') }
+    # Or with an argument:
+    # scope :by_category, ->(category) { where(:categories => "{#{category}}") }
 end
