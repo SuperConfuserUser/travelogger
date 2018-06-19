@@ -2,10 +2,23 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
   def index
+    # "fat models, skinny controllers"
+    @category = Category.all
+
+    # select_by_category if category_selected?
+
     if params[:user_id] 
-      @trips = find_user.trips
+      if category_selected?
+        @trips = find_user.trips.by_category(filter)
+      else
+        @trips = find_user.trips
+      end
     else
-      @trips = Trip.all.reverse
+      if category_selected?
+        @trips = Trip.all.by_category(filter)
+      else
+        @trips = Trip.all
+      end
     end
   end
 
@@ -86,6 +99,14 @@ class TripsController < ApplicationController
   def user_id
     #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
     params[:user_id] || current_user.id 
+  end
+
+  def filter
+    params[:category]
+  end
+
+  def category_selected?
+    !!params[:category]
   end
   
 end

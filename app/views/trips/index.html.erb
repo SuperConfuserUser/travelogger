@@ -1,5 +1,14 @@
 <h1>The Places We Have Been</h1>
 
+
+<%= link_to "All", trips_path %>
+
+<% Category.all.each do |category| %>
+  <%= link_to category.name.capitalize, trips_path(category: category.name) %>
+<% end %>
+
+
+<br><br>
 <%= link_to "Add Trip", new_user_trip_path(current_user) if logged_in? %>
 
 <ul>
@@ -7,6 +16,36 @@
   <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", user_trip_path(trip.user, trip) %> on <%= trip.start_date.strftime("%B %e, %Y") %></li>
 <% end %>
 </ul>
+
+<!-- <%= form_for Trip.new do |f| %>
+
+  <% Category.all.each do |category| %>
+    <%= f.submit category.name %>
+  <% end %>
+
+<% end %> -->
+
+<!-- <%= form_tag trips_path, method: 'get' do %>
+  <%= select_tag "category_id", options_for_select(@category.map{ |category| [category.name, category.id] }, selected: params["category_id"]) %>
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<form action="/">
+  <input class="toggle" type="checkbox">
+</form> -->
+
+<!-- <%= form_tag trips_path, method: 'get' do %>
+  <%= collection_check_boxes :trip, :category_ids, Category.all, :id, :name, :class =>"toggle" %>
+  <%= submit_tag "Filter" %>
+<% end %>
+
+<%= form_for Trip.new do |f| %>
+<%= f.check_box :category_ids, :class => "toggle" %>
+<% end %> -->
+
+
+
+
 
 
 <!-- <%= image_tag("default_profile.png", size: "50x50") %> -->
