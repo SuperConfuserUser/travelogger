@@ -3,21 +3,23 @@ class TripsController < ApplicationController
 
   def index
     # "fat models, skinny controllers"
-    @category = Category.all
+    @categories = Category.all
 
-    # select_by_category if category_selected?
+    #need to pass user_id in the category links....
 
-    if params[:user_id] 
+    find_user
+    
+    if params[:user_id]
       if category_selected?
-        @trips = find_user.trips.by_category(filter)
+        @trips = Trip.by_user(params[:user_id]).by_category(filter)
       else
-        @trips = find_user.trips
+        @trips = Trip.by_user(params[:user_id])
       end
     else
       if category_selected?
-        @trips = Trip.all.by_category(filter)
+        @trips = Trip.by_newest.by_category(filter)
       else
-        @trips = Trip.all
+        @trips = Trip.by_newest
       end
     end
   end

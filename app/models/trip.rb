@@ -49,6 +49,7 @@ class Trip < ApplicationRecord
   scope :by_newest, -> { order('created_at desc') }
   scope :by_oldest, -> { order('created_at asc') }
 
+  scope :by_user, -> (user_id) { where(user: user_id) }
   scope :by_category, -> (category_name) { joins(:categories).where('categories.name' => category_name) }
 
   
