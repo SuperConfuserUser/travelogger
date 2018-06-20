@@ -7,7 +7,7 @@ class TripsController < ApplicationController
     @categories = Category.all
     set_user
 
-    @trips = Trip.filtered_by( order: params[:order], user: params[:user_id], category: params[:category])
+    @trips = Trip.filtered_by(user: params[:user_id], category: params[:category])
   end
 
   def show
@@ -88,7 +88,7 @@ class TripsController < ApplicationController
     params[:user_id] || current_user.id 
   end
 
-    #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
+      #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
 
 
 end
