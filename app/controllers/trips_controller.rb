@@ -5,23 +5,9 @@ class TripsController < ApplicationController
     # "fat models, skinny controllers"
     @categories = Category.all
 
-    #need to pass user_id in the category links....
+    set_user
 
-    find_user
-    
-    if params[:user_id]
-      if category_selected?
-        @trips = Trip.by_user(params[:user_id]).by_category(filter)
-      else
-        @trips = Trip.by_user(params[:user_id])
-      end
-    else
-      if category_selected?
-        @trips = Trip.by_newest.by_category(filter)
-      else
-        @trips = Trip.by_newest
-      end
-    end
+    @trips = Trip.filtered_by( order: params[:order], user: params[:user_id], category: params[:category])
   end
 
   def show
@@ -48,14 +34,14 @@ class TripsController < ApplicationController
   end
 
   def edit
-    if params[:user_id]
-      find_user
-      if !find_user
+    if user_id
+      set_user
+      if !set_user
         redirect_to trips_path, alert: "User not found."
       elsif @trip.nil?
         redirect_to user_trips_path(@user), alert: "Trip not found."
       end
-      if find_user != current_user
+      if set_user != current_user
         redirect_to :back, alert: "Not allowed."
       end
     end
@@ -94,7 +80,7 @@ class TripsController < ApplicationController
     params[:commit] == "+"
   end
 
-  def find_user
+  def set_user
     @user = User.find_by(id: params[:user_id])
   end
 
@@ -103,12 +89,4 @@ class TripsController < ApplicationController
     params[:user_id] || current_user.id 
   end
 
-  def filter
-    params[:category]
-  end
-
-  def category_selected?
-    !!params[:category]
-  end
-  
 end
