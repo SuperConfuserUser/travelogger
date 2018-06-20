@@ -5,7 +5,6 @@ class TripsController < ApplicationController
 
   def index
     @categories = Category.all
-
     set_user
 
     @trips = Trip.filtered_by( order: params[:order], user: params[:user_id], category: params[:category])
@@ -86,8 +85,10 @@ class TripsController < ApplicationController
   end
 
   def user_id
-    #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
     params[:user_id] || current_user.id 
   end
+
+    #covers if route is nested or unnested. I wrote links so they should always be nested, but user can always go to the un-nested manually
+
 
 end
