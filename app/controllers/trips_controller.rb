@@ -1,8 +1,9 @@
 class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
 
+  # "fat models, skinny controllers"
+
   def index
-    # "fat models, skinny controllers"
     @categories = Category.all
 
     set_user

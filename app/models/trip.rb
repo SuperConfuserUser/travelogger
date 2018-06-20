@@ -46,13 +46,10 @@ class Trip < ApplicationRecord
 
   #SCOPE
 
-  # a by_order scope? what's the cleanest way of passing desc/asc?
-  scope :by_newest, -> { order('created_at desc') }
-  scope :by_oldest, -> { order('created_at asc') }
-
+  scope :by_order, -> (order) { order(created_at: order) }
   scope :by_user, -> (user_id) { where(user: user_id) }
   scope :by_category, -> (category_name) { joins(:categories).where('categories.name' => category_name) }
-  
+
   # examples used to build out a fancy scope
     # succ = ->(x) { x + 1 }
     # succ = lambda { |x| x + 1 }
@@ -64,15 +61,13 @@ class Trip < ApplicationRecord
 
   #CUSTOM
 
-  def self.filtered_by(order: 'new', user:  nil, category: nil)
-    trip = order == 'new' ? Trip.by_newest : Trip.by_oldest
-    
+  def self.filtered_by(order: 'desc', user:  nil, category: nil)     # order 'desc' new and 'asc' old
     #join queries can cause issues with duplicates. using distinct for relations vs. uniq for array
-    return trip.by_user(user).by_category(category).distinct if user && category 
-    return trip.by_user(user).distinct if user 
-    return trip.by_category(category).distinct if category
+    return trip.by_order(order).by_user(user).by_category(category).distinct if user && category 
+    return trip.by_order(order).by_user(user).distinct if user 
+    return trip.by_order(order).by_category(category).distinct if category
 
-    trip
+    trip.by_order(order)
   end
 
 end

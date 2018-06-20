@@ -5,7 +5,11 @@
 <% end %>
 
 <h1><%= @user.username %></h1>
-<p>Been there. Done that.</p>
+  <% if @user.about %>
+    <p><%= @user.about %></p>
+  <% else %>
+    <%= link_to "Add description", edit_user_path(current_user) if @user == current_user %>
+  <% end %>
 
 <h2><%= link_to pluralize(@user.trips.count, 'Trip'), user_trips_path(@user) %></h2>
 
