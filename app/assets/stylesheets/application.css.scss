@@ -1,11 +1,10 @@
-// Custom bootstrap variables must be set or imported *before* bootstrap.
-// @import "bootstrap";
-
-
 /* ...
 *= require_self
 *= require_tree .
 */
+
+// Custom bootstrap variables must be set or imported *before* bootstrap.
+// @import "bootstrap";
 
 /*
   Theme Name: Avilon
@@ -26,12 +25,13 @@ body {
 a {
   color: #1dc8cd;
   transition: 0.5s;
+  text-decoration: none;
 }
 
 a:hover, a:active, a:focus {
   color: #1dc9ce;
   outline: none;
-  text-decoration: none;
+  text-decoration: underline;
 }
 
 p {
@@ -46,43 +46,30 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-/* Back to top button */
-.back-to-top {
-  position: fixed;
-  display: none;
-  background: linear-gradient(45deg, #1de099, #1dc8cd);
-  color: #fff;
-  padding: 2px 20px 8px 20px;
-  font-size: 16px;
-  border-radius: 4px 4px 0 0;
-  right: 15px;
-  bottom: 0;
-  transition: none;
+main {
+  margin: 90px 0 0 0;
 }
 
-.back-to-top:focus {
-  background: linear-gradient(45deg, #1de099, #1dc8cd);
-  color: #fff;
-  outline: none;
-}
-
-.back-to-top:hover {
-  background: #1dc8cd;
-  color: #fff;
-}
 
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 #header {
-  padding: 30px 0;
-  height: 92px;
+  // padding: 30px 0;
+  // height: 92px;
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
+  // transition: all 0.5s;
+  // z-index: 997;
+}
+
+#header.header-fixed {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  padding: 20px 0;
+  height: 20px;
   transition: all 0.5s;
-  z-index: 997;
 }
 
 #header #logo {
@@ -91,18 +78,20 @@ h1, h2, h3, h4, h5, h6 {
 
 #header #logo h1 {
   font-size: 36px;
-  margin: -4px 0 0 0;
+  margin: -12px 0 0 0;
   padding: 0;
   line-height: 1;
   display: inline-block;
   font-family: "Montserrat", sans-serif;
-  font-weight: 300;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-weight: 700;
+  
+  // letter-spacing: 0px;
+  // text-transform: uppercase;
 }
 
 #header #logo h1 a, #header #logo h1 a:hover {
   color: #fff;
+  text-decoration: none;
 }
 
 #header #logo img {
@@ -120,13 +109,6 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-#header.header-fixed {
-  background: linear-gradient(45deg, #1de099, #1dc8cd);
-  padding: 20px 0;
-  height: 72px;
-  transition: all 0.5s;
-}
-
 /*--------------------------------------------------------------
 # Navigation Menu
 --------------------------------------------------------------*/
@@ -135,6 +117,10 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0;
   padding: 0;
   list-style: none;
+}
+
+.nav-menu-side {
+  float: right;
 }
 
 .nav-menu ul {
@@ -188,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav Meu Container */
 #nav-menu-container {
-  float: right;
+  float: left;
   margin: 0;
 }
 
@@ -393,7 +379,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 #footer {
   background: #fff;
-  box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
   padding: 30px 0;
   color: #333;
   font-size: 14px;
