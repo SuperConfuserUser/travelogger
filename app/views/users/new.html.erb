@@ -5,16 +5,19 @@
 <br> <br> or <br><br>
 <!-- create into a validation_errors(object) helper -->
 
+<div class="errors">
 <% if @user.errors.any? %>
-    <div class="errors">
-    <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
-    <ol> 
+    <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>!</h3>
+
+    <p><%= @user.errors[:base] if @user.errors[:base].present? %></p>
+    <!-- <ol> 
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
     </ol>
     <br>
-  </div>
+  </div> -->
+
 <% end %>
 
 <!-- create partial to reuse in edit user -->
@@ -22,14 +25,15 @@
 <div class="form">
   <%= form_for @user do |f| %>
 
-    <%= f.text_field :username, placeholder: "Username" %>
-    <%= f.email_field :email, placeholder: "Email" %> 
+    <%= f.text_field :username, placeholder: "Username" %> <%= "Username " + @user.errors[:username].first if @user.errors[:username].present? %> <br>
+    <%= f.email_field :email, placeholder: "Email" %>  <%= "Email " + @user.errors[:email].first if @user.errors[:email].present? %> <br>
  
-    <%= f.password_field :password, placeholder: "Password" %> 
-    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> 
+    <%= f.password_field :password, placeholder: "Password" %>   <%= "Password " + @user.errors[:password].first if @user.errors[:password].present? %> <br>
+    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>  <%= "Password confirmation " + @user.errors[:password_confirmation].first if @user.errors[:password_confirmation].present? %> <br>
     <%= f.submit "Sign up" %>
   <% end %>
-
+</div><!--  form -->
+</div><! -- errors -->
   <br>
   <p>Already a member? <%= link_to "Log in.", login_path %></p>
 </div>
