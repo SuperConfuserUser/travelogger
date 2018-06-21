@@ -1,32 +1,37 @@
 <h2>Sign Up</h2>
 
-<!-- create into a validation_errors(object) helper -->
-
-<% if @user.errors.any? || flash[:alert] %>
-  <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
-  <ul> 
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    <% if flash[:alert] %>
-      <li><%= flash[:alert] %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <%= link_to "Continue with Facebook", "/auth/facebook" %>
 
 <br> <br> or <br><br>
-<!-- create partial for reuse in edit_user -->
+<!-- create into a validation_errors(object) helper -->
 
-<%= form_for @user do |f| %>
-
-  <%= f.text_field :username, placeholder: "Username", required: true %> 
-  <%= f.email_field :email, placeholder: "Email", required: true %> 
-  <%= f.password_field :password, placeholder: "Password", required: true %> 
-  <%= f.password_field :password_confirmation, placeholder: "Password Confirmation", required: true %> 
-  <br>
-  <%= f.submit "Sign up" %>
+<% if @user.errors.any? %>
+    <div class="errors">
+    <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
+    <ol> 
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ol>
+    <br>
+  </div>
 <% end %>
 
-<p>Already a member? <%= link_to "Log in.", login_path %></p>
+<!-- create partial to reuse in edit user -->
+
+<div class="form">
+  <%= form_for @user do |f| %>
+
+    <%= f.text_field :username, placeholder: "Username" %>
+    <%= f.email_field :email, placeholder: "Email" %> 
+ 
+    <%= f.password_field :password, placeholder: "Password" %> 
+    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %> 
+    <%= f.submit "Sign up" %>
+  <% end %>
+
+  <br>
+  <p>Already a member? <%= link_to "Log in.", login_path %></p>
+</div>
+
+

@@ -1,6 +1,4 @@
 <!-- create into a validation_errors(object) helper -->
-<h2>Log In</h2>
-
 <% if @user.errors.any? || flash[:alert] %>
   <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
   <ul> 
@@ -12,6 +10,8 @@
     <% end %>
   </ul>
 <% end %>
+
+<h2>Log In</h2>
 
 <%= link_to "Log in with Facebook", "/auth/facebook" %>
 
