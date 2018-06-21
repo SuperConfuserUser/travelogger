@@ -20,6 +20,7 @@ body {
   color: #666666;
   font-family: "Open Sans", sans-serif;
   overflow-x: hidden;
+  margin: 0;
 }
 
 a {
@@ -47,7 +48,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 main {
-  margin: 90px 0 0 0;
+  padding: 30px 30px 90px 30px;
 }
 
 
@@ -55,21 +56,23 @@ main {
 # Header
 --------------------------------------------------------------*/
 #header {
-  // padding: 30px 0;
-  // height: 92px;
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
+  // position: fixed;
+  // left: 0;
+  // top: 0;
+  // right: 0;
   // transition: all 0.5s;
   // z-index: 997;
 }
 
 #header.header-fixed {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
-  padding: 20px 0;
-  height: 20px;
+  padding: 18px 0;
+  height: 18px;
   transition: all 0.5s;
+}
+
+#header .container {
+  padding: 0 30px;
 }
 
 #header #logo {
@@ -194,6 +197,10 @@ main {
   font-weight: 400;
   font-size: 14px;
   outline: none;
+}
+
+.nav-menu a:hover {
+  text-decoration: underline;
 }
 
 .nav-menu > li {
@@ -379,9 +386,16 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------------------------------------*/
 #footer {
   background: #fff;
-  padding: 30px 0;
+  padding: 30px;
   color: #333;
   font-size: 14px;
+}
+
+.footer-fixed {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 #footer .credits {
