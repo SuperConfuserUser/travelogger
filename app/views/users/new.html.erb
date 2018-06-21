@@ -8,8 +8,9 @@
 <div class="errors">
 <% if @user.errors.any? %>
     <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>!</h3>
-
-    <p><%= @user.errors[:base] if @user.errors[:base].present? %></p>
+    <% if @user.errors[:base].present? %>
+      <p><%= @user.errors[:base] %></p>
+    <% end %>
     <!-- <ol> 
       <% @user.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
@@ -27,7 +28,7 @@
 
     <%= f.text_field :username, placeholder: "Username" %> <%= "Username " + @user.errors[:username].first if @user.errors[:username].present? %> <br>
     <%= f.email_field :email, placeholder: "Email" %>  <%= "Email " + @user.errors[:email].first if @user.errors[:email].present? %> <br>
- 
+ <br>
     <%= f.password_field :password, placeholder: "Password" %>   <%= "Password " + @user.errors[:password].first if @user.errors[:password].present? %> <br>
     <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>  <%= "Password confirmation " + @user.errors[:password_confirmation].first if @user.errors[:password_confirmation].present? %> <br>
     <%= f.submit "Sign up" %>
