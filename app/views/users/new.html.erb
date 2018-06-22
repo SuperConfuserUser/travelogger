@@ -4,30 +4,7 @@
 
 <br> <br> or Create New Account <br><br>
 
-<%= error_alert(@user.errors) %>
-
-<!-- create partial to reuse in edit user -->
-
-<div class="form">
-  <%= form_for @user do |f| %>
-
-    <%= f.text_field :username, placeholder: "Username" %> 
-    <%= error_message("Username", @user.errors[:username]) %>
-    <br>
-    <%= f.email_field :email, placeholder: "Email" %>  
-    <%= error_message("Email", @user.errors[:email]) %>
-    <br>
- <br>
-    <%= f.password_field :password, placeholder: "Password" %>
-    <%= error_message("Password", @user.errors[:password]) %>
-    <br>
-    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>  
-    <%= error_message("Password Confirmation", @user.errors[:password_confirmation]) %>
-    <br>
-    <%= f.submit "Sign up" %>
-  <% end %>
-</div><!--  form -->
-
+<%= render 'user_form', user: @user %>
   <br>
   <p>Already a member? <%= log_in_link %>.</p>
 
