@@ -1,30 +1,18 @@
-<h1>The Places We Have Been</h1>
+<h1><%= trips_index_title(@user) %></h1>
 
+<%= link_to "All", trips_all_link(@user) %>
 
-<% if @user %>
-  <%= link_to "All", user_trips_path(@user) %>
-<% else %>
-  <%= link_to "All", trips_path %>
-<% end %>
 
 <% @categories.each do |category| %>
-  <% if @user %>
-  <%= link_to category.name.capitalize, user_trips_path(@user, category: category.name) %>
-  <% else %>
-    <%= link_to category.name.capitalize, trips_path(category: category.name) %>
-  <% end %>
+  <%= link_to category.name.capitalize, trips_category_filter_link(@user, category.name) %>
 <% end %>
 
 
 <br><br>
-<% if @user %>
-  <%= link_to "Add Trip", new_user_trip_path(current_user) if logged_in? && @user == current_user %>
-<% else %>
-  <%= link_to "Add Trip", new_user_trip_path(current_user) if logged_in? %>
-<% end %>
+<%= add_trip_link(@user) %>
 
 <ul>
 <% @trips.each do |trip| %>
-  <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", user_trip_path(trip.user, trip) %> on <%= trip.start_date.strftime("%B %e, %Y") %></li>
+  <li><%= image_tag trip.user.image, size: "50x50" %> <%= link_to "#{trip.name}", user_trip_path(trip.user, trip) %> on <%= trip_listed_date(trip.start_date) %></li>
 <% end %>
 </ul>

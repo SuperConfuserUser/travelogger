@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   # before_action :require_login
   # skip_before_action :require_login, only: [:index]
   
-  helper_method :current_user, :logged_in?
+  helper_method :current_user, :logged_in?, :authorized?
 
   def current_user
     current_user ||= User.find(session[:user_id]) if session[:user_id]
