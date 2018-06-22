@@ -13,10 +13,11 @@ module TripsHelper
   end
 
   def add_trip_link(user)
+    add_trip_link = link_to "New trip", new_user_trip_path(current_user), class: "add-trip"
     if user 
-      link_to "Add trip", new_user_trip_path(current_user) if authorized?(user) 
+      add_trip_link if authorized?(user) 
     else
-      link_to "Add trip", new_user_trip_path(current_user) if logged_in?
+      add_trip_link if logged_in?
     end
   end
 

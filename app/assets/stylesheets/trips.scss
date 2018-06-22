@@ -2,3 +2,62 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.trips .add-trip {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin: 0 5px 5px 0;
+  color: #fff;
+}
+
+.trips .trip-category {
+  border: 2px solid  #b3b3b3;
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin: 0 5px 5px 0;
+  color: #666666;
+  display: inline-block;
+}
+
+.trips .trip-category:hover, .trips .add-trip:hover {
+  background: #1dc8cd;
+  border-color: #1dc8cd;
+  color: #fff;
+}
+
+.trips ul {
+  list-style-type: none;
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.trips li {
+  display: block;
+  width: 100%;
+  margin-bottom: 22px;
+}
+
+.trips .list-avatar {
+  float: left;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  margin-right: 10px;
+}
+
+.trips .list-description {
+ margin: 0;
+}
+
+.trips .list-title {
+  font-weight: 700;
+}
+
+.trips .camo-link {
+  color: #666666;
+}
+
+.trips .camo-link:hover {
+  color: #1dc9ce;
+}
