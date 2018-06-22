@@ -1,6 +1,6 @@
 <h2>Sign Up</h2>
 
-<%= link_to "Continue with Facebook", "/auth/facebook" %>
+<%= facebook_auth_link %>
 
 <br> <br> or Create New Account <br><br>
 
@@ -11,16 +11,24 @@
 <div class="form">
   <%= form_for @user do |f| %>
 
-    <%= f.text_field :username, placeholder: "Username" %> <%= "Username " + @user.errors[:username].first if @user.errors[:username].present? %> <br>
-    <%= f.email_field :email, placeholder: "Email" %>  <%= "Email " + @user.errors[:email].first if @user.errors[:email].present? %> <br>
+    <%= f.text_field :username, placeholder: "Username" %>
+    <%= error_message("Username", @user.errors[:username]) %>
+    <br>
+    <%= f.email_field :email, placeholder: "Email" %>  
+    <%= error_message("Email", @user.errors[:email]) %>
+    <br>
  <br>
-    <%= f.password_field :password, placeholder: "Password" %>   <%= "Password " + @user.errors[:password].first if @user.errors[:password].present? %> <br>
-    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>  <%= "Password confirmation " + @user.errors[:password_confirmation].first if @user.errors[:password_confirmation].present? %> <br>
+    <%= f.password_field :password, placeholder: "Password" %>
+    <%= error_message("Password", @user.errors[:password]) %>
+    <br>
+    <%= f.password_field :password_confirmation, placeholder: "Password Confirmation" %>  
+    <%= error_message("password_confirmation", @user.errors[:password_confirmation]) %>
+    <br>
     <%= f.submit "Sign up" %>
   <% end %>
 </div><!--  form -->
+
   <br>
-  <p>Already a member? <%= link_to "Log in.", login_path %></p>
-</div>
+  <p>Already a member? <%= log_in_link %>.</p>
 
 

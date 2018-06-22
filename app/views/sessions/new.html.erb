@@ -1,29 +1,22 @@
-<!-- create into a validation_errors(object) helper -->
-<% if @user.errors.any? || flash[:alert] %>
-  <h3>There <%= @user.errors.count < 2 ? 'was' : 'were' %> <%= pluralize(@user.errors.any? ? @user.errors.count : '1', "error") %>:</h3>
-  <ul> 
-    <% @user.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    <% if flash[:alert] %>
-      <li><%= flash[:alert] %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <h2>Log In</h2>
 
-<%= link_to "Log in with Facebook", "/auth/facebook" %>
+<%= facebook_auth_link %>
 
 <br> <br> or <br><br>
 
-<%= form_for @user, url: login_path, method: :post do |f| %>
+<%= error_alert(@user.errors) %>
 
-  <%= f.email_field :email, placeholder: "Email", required: true %> 
-  <%= f.password_field :password, placeholder: "Password", required: true %> 
-  <br>
-  <%= f.submit 'Log in' %>
-<% end %>
+<div class="form">
+  <%= form_for @user, url: login_path, method: :post do |f| %>
 
-<p>Don't have an account? <%= link_to "Sign up.", signup_path %></p>
+    <%= f.email_field :email, placeholder: "Email" %> <br>
+    <%= f.password_field :password, placeholder: "Password" %>  
+    <br>
+    <%= f.submit 'Log in' %>
+  <% end %>
+</div><!--  form -->
+
+<br>
+
+<p>Don't have an account? <%= sign_up_link %>.</p>
 
