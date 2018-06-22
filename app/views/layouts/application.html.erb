@@ -16,16 +16,10 @@
   <body>
 
     <%= render 'shared/alert' %>
-    
-    <% if current_page?('/') %>
-      <%= yield %>
-    <% else %>
-      <%= render 'shared/navigation' %>
-      
-      <main>
-        <%= yield %>
-      </main>
-    <% end %>
+
+    <%= shared_navigation %>
+
+    <%= render 'shared/main' %>
 
     <%= render 'shared/footer' %>
 
