@@ -1,10 +1,7 @@
 <h1>Travellers</h1>
 
 <ul>
-<% @users.each do |user| %>
-  <li><%= image_tag user.image, size: "50x50" %> <%= link_to "#{user.username}", user %></li>
-<% end %>
+  <% @users.each do |user| %>
+    <li><%= image_tag user.image, size: "50x50" %> <%= link_to "#{user.username}", user %></li>
+  <% end %>
 </ul>
-
-
-<!-- <%= image_tag("default_profile.png", size: "50x50") %> -->

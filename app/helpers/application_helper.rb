@@ -26,4 +26,9 @@ module ApplicationHelper
     link_to "Log in", login_path
   end
 
+  #DATES
+  def date_long(date)
+    date.strftime("%B %e, %Y") #Month 00, 0000
+  end
+
 end

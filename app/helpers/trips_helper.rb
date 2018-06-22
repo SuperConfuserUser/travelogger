@@ -1,7 +1,8 @@
 module TripsHelper
   #INDEX
   def trips_index_title(user)
-    user ? "The Things I've Seen" : "The Places We've Been"
+    username = authorized?(user) ? "I've" : "#{user.username} has" if user
+    user ? "The Things #{username} Seen" : "The Places We've Been"
   end
 
   def trips_all_link(user)
@@ -13,7 +14,7 @@ module TripsHelper
   end
 
   def add_trip_link(user)
-    add_trip_link = link_to "New trip", new_user_trip_path(current_user), class: "add-trip"
+    add_trip_link = link_to "New trip", new_user_trip_path(current_user), class: "add-trip" if logged_in?
     if user 
       add_trip_link if authorized?(user) 
     else
@@ -21,8 +22,4 @@ module TripsHelper
     end
   end
 
-  #DATES
-  def trip_listed_date(date)
-    date.strftime("%B %e, %Y") #Month 00, 0000
-  end
 end

@@ -1,30 +1,21 @@
 <section class="trips">
   <h1><%= trips_index_title(@user) %></h1> 
 
-  <%= add_trip_link(@user) %>
+  <div class="trip-navigation">
+    <%= add_trip_link(@user) %>
 
-  <%= link_to "All", trips_all_link(@user), class: "trip-category" %>
+    <%= link_to "All", trips_all_link(@user), class: "trip-category" %>
 
-  <% @categories.each do |category| %>
-    <%= link_to category.name.capitalize, trips_category_filter_link(@user, category.name), class: "trip-category" %>
-  <% end %>
-
-  <br><br><br>
-
+    <%= render collection: @categories, partial: 'trips/trip_category', as: :category, locals: {user: @user} %>
+  </div><!-- trip-navigation -->
+  
   <ul>
-  <% @trips.each do |trip| %>
-    <li>
-      <%= link_to trip.user do %>
-        <%= image_tag trip.user.image, class: "list-avatar" %>
-      <% end %>
-      <div class="list-description">
-        <%= link_to trip.name, user_trip_path(trip.user, trip), class: "list-title" %>
-        <br>
-        <%= link_to trip.user.username, user_path(trip.user), class: "camo-link" %>  on <%= trip_listed_date(trip.start_date) %>
-      </div><!-- list-description -->
-    </li>
-  <% end %>
+    <%= render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
   </ul>
 
-
 </section><!-- trips -->
+
+
+
+
+

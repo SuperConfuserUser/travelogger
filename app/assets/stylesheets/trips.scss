@@ -2,22 +2,40 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.trips .trip-navigation {
+  margin-bottom: 36px;
+}
+
 .trips .add-trip {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
   border-radius: 20px;
   padding: 8px 30px;
   margin: 0 5px 5px 0;
   color: #fff;
+  text-decoration: none;
 }
 
+//ghost version
 .trips .trip-category {
   border: 2px solid  #b3b3b3;
   border-radius: 20px;
-  padding: 8px 30px;
+  padding: 6px 30px;
   margin: 0 5px 5px 0;
   color: #666666;
   display: inline-block;
+  text-decoration: none;
 }
+
+// filled version
+// .trips .trip-category {
+//   background: #dddddd;
+//   border-radius: 20px;
+//   padding: 8px 30px;
+//   margin: 0 5px 5px 0;
+//   color: #666666;
+//   display: inline-block;
+//   text-decoration: none;
+// }
 
 .trips .trip-category:hover, .trips .add-trip:hover {
   background: #1dc8cd;
@@ -52,6 +70,7 @@
 
 .trips .list-title {
   font-weight: 700;
+  display: block;
 }
 
 .trips .camo-link {
