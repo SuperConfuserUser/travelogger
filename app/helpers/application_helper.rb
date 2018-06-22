@@ -12,6 +12,7 @@ module ApplicationHelper
     end
   end
   
+  # LINKS
   def sign_up_link
     link_to "Sign up", signup_path
   end

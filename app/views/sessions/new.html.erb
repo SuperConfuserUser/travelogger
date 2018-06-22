@@ -2,15 +2,19 @@
 
 <%= facebook_auth_link %>
 
-<br> <br> or <br><br>
+<br> <br> or Use Email<br><br>
 
 <%= error_alert(@user.errors) %>
 
+<!-- create partial to reuse for edit_user -->
 <div class="form">
   <%= form_for @user, url: login_path, method: :post do |f| %>
 
-    <%= f.email_field :email, placeholder: "Email" %> <br>
+    <%= f.email_field :email, placeholder: "Email" %>
+    <%= error_message("Email", @user.errors[:email]) %>
+    <br>
     <%= f.password_field :password, placeholder: "Password" %>  
+    <%= error_message("Password", @user.errors[:password]) %>
     <br>
     <%= f.submit 'Log in' %>
   <% end %>
