@@ -14,6 +14,10 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
+  def authorized?(user)
+    current_user == user
+  end
+
   private
   
   def user_params
