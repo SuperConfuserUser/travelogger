@@ -2,6 +2,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy]
   before_action :user_url_validation, only: [:new, :show, :edit]
   before_action :trip_url_validation, only: [:show, :edit]
+  
   # "fat models, skinny controllers"
 
   def index
@@ -21,13 +22,12 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new(trip_params)
-    authorized_validation(@trip.user)
 
     if added_location? || !@trip.save
       @trip.locations.build if added_location?
       render :new
     else
-      redirect_to @trip
+      redirect_to user_trip_path(@trip.user, @trip)
     end
   end
 
@@ -39,10 +39,11 @@ class TripsController < ApplicationController
     authorized_validation(@trip.user)
     @trip.update(trip_params)
 
-    if @trip.save
-      redirect_to user_trip_path(@trip.user, @trip)
+    if added_location? || !@trip.save
+      @trip.locations.build if added_location?
+      render :edit 
     else
-      render :edit
+      redirect_to user_trip_path(@trip.user, @trip)
     end
   end
 

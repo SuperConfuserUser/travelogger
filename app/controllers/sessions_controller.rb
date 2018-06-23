@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
-    #saves the entered data if it needs to re-render the page
     @user = User.new
   end
 
      
   def create
-
     if auth 
       @user = User.find_or_create_by_omniauth(auth)
       login
@@ -24,7 +22,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session.delete :user_id
-    redirect_to root_path, alert: "logged out!"
+    redirect_to root_path
   end
 
   private 
