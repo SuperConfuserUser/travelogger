@@ -5,7 +5,7 @@
   <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
 
   <div>
-      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %>
+      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %> <%= link_to pluralize(@user.trips.count, 'Trip'), user_trips_path(@user) %>
       <br>
       <%= @trip.created_at.strftime("%b %e, %Y") %>
   </div>

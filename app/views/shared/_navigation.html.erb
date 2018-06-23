@@ -1,0 +1,23 @@
+<!--==========================
+    Header and Navigation
+  ============================-->
+  <header id="header" class="header-fixed">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <h1><%= link_to "Travelogger", root_path %>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><%= link_to "Trips", trips_navigation_link %></li>
+          <li><%= link_to "Travellers", users_path %></li>
+          
+          <%= conditional_navigation %>
+           
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->

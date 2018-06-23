@@ -1,0 +1,12 @@
+<!--==========================
+  Main
+============================-->
+<% if current_page?('/') %>
+  <%= yield %>
+<% else %>
+  <main>
+    <%= yield %>
+  </main>
+<% end %>
+
+<!-- can do a helper for the if statement, but not sure how do yield with main tags for else -->

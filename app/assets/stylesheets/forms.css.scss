@@ -1,0 +1,68 @@
+/* Forms 
+--------------------------------*/
+.form input, .form textarea {
+  border-radius: 0;
+  font-size: 14px;
+  padding: 7px;
+  margin: 0 10px 10px 0;
+}
+
+.form textarea {
+  height: 100px;
+  width: 400px;
+}
+
+.form button[type="submit"], .form input[type="submit"] {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border: 0;
+  border-radius: 20px;
+  padding: 8px 30px;
+  color: #fff;
+}
+
+.form button[type="submit"]:hover, .form input[type="submit"]:hover {
+  cursor: pointer;
+  background: #1dc8cd;
+  border-color: #1dc8cd;
+  color: #fff;
+}
+
+.form button[type="submit"].secondary-button, .form input[type="submit"].secondary-button {
+  border-radius: 20px;
+  padding: 6px 10px;
+  margin: 0 5px 5px 0;
+  font-weight: 700;
+}
+
+// ERRORS
+
+.form .field_with_errors input {
+  border: solid 2px red;
+  background: rgb(255, 241, 241);
+}
+
+.form .field_with_errors {
+  display: inline;
+}
+
+.errors {
+  color: red;
+}
+
+.form .add-trip {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin: 0 5px 5px 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+
+// CHECKBOX
+.form input[type="checkbox"] + label {
+  text-transform: capitalize;
+  margin-right: 10px;
+}
+
+

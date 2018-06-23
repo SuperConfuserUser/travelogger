@@ -1,0 +1,8 @@
+<li>
+  <%= render 'users/user_avatar_link', user: trip.user, klass: "list-avatar" %>
+
+  <div class="list-description">
+    <%= link_to trip.name, user_trip_path(trip.user, trip), class: "list-title" %>
+    <%= render 'users/user_name_link', user: trip.user, klass: "camo-link" %> on <%= date_long(trip.start_date) %>
+  </div><!-- list-description -->
+</li>

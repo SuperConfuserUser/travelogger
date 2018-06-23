@@ -1,0 +1,28 @@
+<%= error_alert(user.errors) %>
+
+<div class="form">
+  <%= form_for user do |f| %>
+
+    <%= f.text_field :username, placeholder: "Username" %> 
+    <%= error_message("Username", user.errors[:username]) %>
+    <br>
+
+    <%= f.email_field :email, placeholder: "Email" %>  
+    <%= error_message("Email", user.errors[:email]) %>
+    <br>
+    <br>
+
+    <%= f.password_field :password, placeholder: user_form_password_label(user) %>
+    <%= error_message("user_form_password_label(user)", user.errors[:password]) %>
+    <br>
+
+    <%= f.password_field :password_confirmation, placeholder: user_form_password_confirm_label(user) %>
+    <%= error_message(user_form_password_confirm_label(user), user.errors[:password_confirmation]) %>
+    <br>
+
+    <%= user_form_edit_options(f, user) %>
+
+    <%= f.submit form_submit_text(user) %>
+  <% end %>
+</div><!--  form -->
+
