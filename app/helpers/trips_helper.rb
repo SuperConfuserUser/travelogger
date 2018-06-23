@@ -22,4 +22,7 @@ module TripsHelper
     end
   end
 
+  #OTHER
+  
+
 end
