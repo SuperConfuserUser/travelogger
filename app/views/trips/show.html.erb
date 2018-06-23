@@ -5,30 +5,24 @@
   <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
 
   <div>
-      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %> <%= link_to pluralize(@user.trips.count, 'Trip'), user_trips_path(@user) %>
+      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %>
+       <%= user_trips_count_link(@user)  %>
       <br>
-      <%= @trip.created_at.strftime("%b %e, %Y") %>
+      <%= date_short(@trip.created_at) %>
   </div>
-
   <br>
 
-  <%= "Location".pluralize(@trip.locations.count) + ": " + @trip.locations.pluck('name').join(', ') %>
-
+  <%= trip_location_label(@trip) %> : <%= trip_location_list(@trip) %>
   <br>
 
-  Date: <%= date_long(@trip.start_date) %> <%= "to " + date_long(@trip.end_date) if @trip.end_date %>
-
+  Date: <%= trip_date_range(@trip) %>
   <br>
 
-  <%= "Type".pluralize(@trip.locations.count - 1) + ": " +  @trip.categories.pluck('name').map { |name| name.capitalize }.join(', ') %>
-
+  <%= trip_type_label(@trip) %> : <%= trip_type_list(@trip) %>
   <br><br>
 
   <p><%= @trip.note %></p>
 
-  <% if authorized?(@user) %>
-    <%= link_to "Edit", edit_user_trip_path(@trip.user, @trip), class: "link-as-button" %> <%= link_to "Delete", @trip, method: :delete, class: "link-as-button ghost" %>
-  
-  <% end %>
+  <%= trip_edit_link(@trip, "link-as-button") %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
 
 </section>
