@@ -1,0 +1,10 @@
+<li>
+  <%= render 'users/user_avatar_link', user: user, klass: "list-avatar" %>
+
+  <div>
+    <%= render 'users/user_name_link', user: user, klass: "list-title" %>
+      <%= user_trips_count_link(user)  %>
+    <br>
+    last active on <%= user_last_active_date(user) %>
+  </div>
+</li>

@@ -33,7 +33,6 @@ module ApplicationHelper
 
   def date_long(date) #Month 1, 2000
     current_year?(date) ? date.strftime("%B %e") : date.strftime("%B %e, %Y")
-     
   end
 
   def date_short(date) #Mon 1, 2000

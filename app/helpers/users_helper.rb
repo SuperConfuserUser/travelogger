@@ -18,4 +18,13 @@ module UsersHelper
   def user_trips_count_link(user)
     link_to "(#{pluralize(user.trips.count, 'Trip')})", user_trips_path(user)
   end
+
+  def user_last_active_date(user)
+    user.trips.last.present? ? date_short(user.trips.last.created_at) : user_join_date(user)
+  end
+
+  def user_join_date(user)
+    date_short(user.created_at)
+  end
+
 end
