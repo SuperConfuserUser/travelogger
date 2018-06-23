@@ -32,7 +32,7 @@ class TripsController < ApplicationController
   end
 
   def edit
-    authorized_validation(@user)
+    authorized_validation
   end
     
   def update
