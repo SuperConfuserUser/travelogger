@@ -2,6 +2,8 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//INDEX
+
 .users ul {
   list-style-type: none;
   display: block;
@@ -37,4 +39,26 @@
 
 .users .camo-link:hover {
   color: #1dc9ce;
+}
+
+//SHOW
+
+.users .user-title h1 {
+  margin: 0;
+}
+
+.users .link-as-button {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border: none;
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin: 0 5px 5px 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.users .link-as-button:hover {
+  background: #1dc8cd;
+  border-color: #1dc8cd;
+  color: #fff;
 }

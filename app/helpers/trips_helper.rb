@@ -21,6 +21,14 @@ module TripsHelper
       add_trip_link if logged_in?
     end
   end
+
+  def trip_label(trip)
+    if nested?
+      "at " + trip_location_list(trip)
+    else
+      render 'users/user_name_link', user: trip.user, klass: "camo-link" 
+    end 
+  end 
   
 
   #SHOW
@@ -29,7 +37,13 @@ module TripsHelper
   end
 
   def trip_location_list(trip)
-    trip.locations.pluck('name').join(', ')
+    locations = trip.locations.pluck('name')
+    if locations.count <= 2
+      locations.join(" and ")
+    else
+      locations.last.prepend("and ")
+      locations.join(", ")
+    end
   end
 
   def trip_date_range(trip)

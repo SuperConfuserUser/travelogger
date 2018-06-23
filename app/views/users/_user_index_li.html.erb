@@ -5,6 +5,6 @@
     <%= render 'users/user_name_link', user: user, klass: "list-title" %>
       <%= user_trips_count_link(user)  %>
     <br>
-    last active on <%= user_last_active_date(user) %>
+    last active on <%= date_long(user_last_active_date(user)) %>
   </div>
 </li>
