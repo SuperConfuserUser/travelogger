@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @latest_limit = 5;
   end
 
   def new

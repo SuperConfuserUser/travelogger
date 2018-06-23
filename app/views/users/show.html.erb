@@ -1,41 +1,22 @@
 <section class="users">
 
-    <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
+  <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
 
   <div class="user-title">
       <h1><%=@user.username %></h1>
-      <% if @user.tagline %>
-        <%= @user.tagline %></p>
-      <% elsif @user == current_user%>
-        <%= link_to "Add tagline", edit_user_path(current_user) %>
-      <% else %>
-        A traveller. A wanderer.  
-      <% end %>
+      <%= user_tagline(@user) %>
   </div>
   <br>
 
   <p>
-    <% if @user.profile %>
-      <%= @user.profile %></p>
-    <% else %>
-      <%= link_to "Add profile", edit_user_path(current_user) if @user == current_user %>
-    <% end %>
+    <%= user_profile(@user) %>
   </p>
 
-  <h2>Latest Travels</h2>
-
-  <ul class="trips">
-      <%= render collection: @user.trips.first(5), partial: 'trips/trips_index_li', as: :trip %>
-  </ul>
-  
-  <%= link_to "More trips", user_trips_path(@user) if @user.trips.count > 5 %>
-  <br><br>
+  <%= user_latest_trips(@user, @latest_limit) %>
 
   Travelogger since <%= date_long(user_join_date(@user)) %>
   <br><br>
   
-  <% if @user == current_user %>
-    <%= link_to "Edit account", edit_user_path(current_user), class: "link-as-button" %>
-  <% end %>
+ <%= user_edit_link(@user, "link-as-button") %>
 
 </section><!-- users -->
