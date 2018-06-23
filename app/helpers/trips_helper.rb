@@ -21,8 +21,5 @@ module TripsHelper
       add_trip_link if logged_in?
     end
   end
-
-  #OTHER
   
-
 end

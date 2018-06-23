@@ -30,5 +30,5 @@ module ApplicationHelper
   def date_long(date)
     date.strftime("%B %e, %Y") #Month 00, 0000
   end
-
+  
 end
