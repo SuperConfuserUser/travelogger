@@ -1,23 +1,34 @@
-<%= image_tag @trip.user.image, size: "50x50" %> <%= link_to @trip.user.username, user_path(@trip.user) %>
+<section class="trips">
 
-<h1><%= @trip.name %></h1>
+  <h1><%= @trip.name %></h1>
 
-<%= "Location".pluralize(@trip.locations.count) + ": " + @trip.locations.pluck('name').join(', ') %>
+  <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
 
-<br>
+  <div>
+      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %>
+      <br>
+      <%= @trip.created_at.strftime("%b %e, %Y") %>
+  </div>
 
-Date: <%= @trip.start_date.strftime("%B %e, %Y") %> <%= "to " + @trip.end_date.strftime("%B %e, %Y") if @trip.end_date %>
+  <br>
 
+  <%= "Location".pluralize(@trip.locations.count) + ": " + @trip.locations.pluck('name').join(', ') %>
 
-<br>
+  <br>
 
-<%= "Type".pluralize(@trip.locations.count) + ": " +  @trip.categories.pluck('name').map { |name| name.capitalize }.join(', ') %>
+  Date: <%= date_long(@trip.start_date) %> <%= "to " + date_long(@trip.end_date) if @trip.end_date %>
 
-<p><%= @trip.note %></p>
+  <br>
 
-<% if current_user == @trip.user %>
-  <%= link_to "Edit", edit_user_trip_path(@trip.user, @trip) %> <%= link_to "Delete", @trip, method: :delete, data: { confirm: "Are you sure?" } %>
+  <%= "Type".pluralize(@trip.locations.count - 1) + ": " +  @trip.categories.pluck('name').map { |name| name.capitalize }.join(', ') %>
 
-  <!-- delete as a button -->
-  <%= button_to "x", edit_user_trip_path(@trip.user, @trip), method: :delete, data: { confirm: "Are you sure?" } %>
-<% end %>
+  <br><br>
+
+  <p><%= @trip.note %></p>
+
+  <% if authorized?(@user) %>
+    <%= link_to "Edit", edit_user_trip_path(@trip.user, @trip), class: "link-as-button" %> <%= link_to "Delete", @trip, method: :delete, class: "link-as-button ghost" %>
+  
+  <% end %>
+
+</section>

@@ -6,8 +6,9 @@
   margin-bottom: 36px;
 }
 
-.trips .add-trip {
+.trips .add-trip, .trips .link-as-button {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border: none;
   border-radius: 20px;
   padding: 8px 30px;
   margin: 0 5px 5px 0;
@@ -16,7 +17,8 @@
 }
 
 //ghost version
-.trips .trip-category {
+.trips .trip-category, .trips .ghost {
+  background: none;
   border: 2px solid  #b3b3b3;
   border-radius: 20px;
   padding: 6px 30px;
@@ -37,7 +39,7 @@
 //   text-decoration: none;
 // }
 
-.trips .trip-category:hover, .trips .add-trip:hover {
+.trips .trip-category:hover, .trips .add-trip:hover, .trips .link-as-button:hover {
   background: #1dc8cd;
   border-color: #1dc8cd;
   color: #fff;
