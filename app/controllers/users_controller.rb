@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
   before_action :user_url_validation, only: [:show, :edit]
-  before_action :authorize_validation, only: [:edit, :update]
+  before_action :authorized_validation, only: [:edit, :update]
 
   def index
     @users = User.all

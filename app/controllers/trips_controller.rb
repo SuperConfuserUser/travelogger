@@ -7,8 +7,6 @@ class TripsController < ApplicationController
 
   def index
     @categories = Category.all
-    set_user
-    
     @trips = Trip.filtered_by(user: params[:user_id], category: params[:category])
   end
 
