@@ -1,22 +1,13 @@
 <!--==========================
 Alert
 ============================-->
-<!-- <div class="alert">
-  <% if flash[:alert] %>
-    <h3>Alert:</h3>
-    <p><%= flash[:alert] %></p>
-  <% end %>
-</div> -->
 
-
-
-<% if flash[:alert] %>
-    <div class="alert">
-      <div class="alert-wrapper"></div>
-     Alert! <%= flash[:alert] %>  
-      <span class="close-button" onclick="this.parentElement.style.display='none';">&#10006;</span>
-      </div>
-    </div>
+<div class="alert">
+  <div class="alert-wrapper"></div>
+  Alert! &nbsp <%= flash_alert %>  
+  <span class="close-button" onclick="this.parentElement.style.display='none';">&#10006;</span>
+  </div>
+</div>
     
-  <% end %>
+
 

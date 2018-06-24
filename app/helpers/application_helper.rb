@@ -16,7 +16,10 @@ module ApplicationHelper
     logged_in? ? user_trips_path(current_user) : trips_path
   end  
 
-  
+  def shared_alert(flash_alert)
+    render 'shared/alert', flash_alert: flash_alert if flash_alert
+  end
+
   # LINKS
   def sign_up_link
     link_to "Sign up", signup_path

@@ -9,13 +9,13 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700, 900 |Open+Sans:400,700,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,400i,700,700i" rel="stylesheet">
 
   </head>
 
   <body>
 
-    <%= render 'shared/alert' %>
+    <%= shared_alert(flash[:alert]) %>
 
     <%= shared_navigation %>
 
