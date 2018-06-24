@@ -3,7 +3,7 @@
 <div class="form">
   <%= form_for user do |f| %>
 
-    <%= f.text_field :username, placeholder: "Username" %> 
+    <%= f.text_field :username, placeholder: "Username" %>   <!-- required: true -->
     <%= error_message("Username", user.errors[:username]) %>
     <br>
 
