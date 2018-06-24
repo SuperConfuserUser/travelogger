@@ -1,7 +1,7 @@
 <h2>Latest Trips</h2>
 
   <ul class="trips">
-      <%= render collection: user.trips.first(latest_limit), partial: 'trips/trips_index_li', as: :trip %>
+      <%= render collection: user.trips.first(latest_limit).reverse, partial: 'trips/trips_index_li', as: :trip %>
   </ul>
   
   <p><%= user_more_trips_link(user, latest_limit) %></p>
