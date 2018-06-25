@@ -12,7 +12,7 @@ Travelogue to keep track of your adventures. Built with Rails on Ruby. It is sti
 
  You can play with it in console mode with the above. 
  
- To use it in server mode as a web app, you will need a key and id for the Omniauth [Facebook] (https://developers.facebook.com) login and an https host. [Ngrok](https://www.sitepoint.com/use-ngrok-test-local-site/) is a nice solution for local https testing.
+ To use it in server mode as a web app, you will need a key and id for the Omniauth [Facebook](https://developers.facebook.com) login and an https host. [Ngrok](https://www.sitepoint.com/use-ngrok-test-local-site/) is a nice solution for local https testing.
 
 ## Development
 
