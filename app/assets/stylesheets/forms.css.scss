@@ -24,7 +24,7 @@
   color: #fff;
 }
 
-.form button[type="submit"]:hover, .form input[type="submit"]:hover {
+.form button[type="submit"]:hover, .form input[type="submit"]:hover, .form button[type="submit"].ghost:hover, .form input[type="submit"].ghost:hover {
   cursor: pointer;
   background: #1dc8cd;
   border-color: #1dc8cd;
@@ -36,6 +36,21 @@
   padding: 6px 10px;
   margin: 0 5px 5px 0;
   font-weight: 700;
+}
+
+.form button[type="submit"].ghost, .form input[type="submit"].ghost {
+  background: none;
+  border: 2px solid #666666;
+  color: #666666;
+
+  // background: none;
+  // border: 2px solid  #b3b3b3;
+  // border-radius: 20px;
+  // padding: 6px 30px;
+  // margin: 0 5px 5px 0;
+  // color: #666666;
+  // display: inline-block;
+  // text-decoration: none;
 }
 
 // ERRORS

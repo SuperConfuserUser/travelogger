@@ -48,7 +48,7 @@ module TripsHelper
 
   def trip_date_range(trip)
     if trip.end_date.present?
-      date_long(trip.start_date) + "to " + date_long(trip.end_date)
+      date_long(trip.start_date) + " to " + date_long(trip.end_date)
     else
       date_long(trip.start_date)
     end

@@ -1,6 +1,6 @@
 <section class="users">
 
-  <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
+  <%= image_tag @user.image, class: "list-avatar" %>
 
   <div class="user-title">
       <h1><%=@user.username %></h1>
