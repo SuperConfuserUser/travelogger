@@ -16,6 +16,10 @@ module UsersHelper
     user.new_record? ? "Password Confirm" : "New Password Confirm"
   end
 
+  def user_form_reset_button(form, user)
+    form.submit "Reset", class: "ghost" if user.persisted?
+  end
+
   #INDEX and SHOW
   def user_trips_count_link(user)
     link_to "(#{pluralize(user.trips.count, 'Trip')})", user_trips_path(user)
