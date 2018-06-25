@@ -3,7 +3,7 @@
   <%= image_tag @user.image, class: "list-avatar" %>
 
   <div class="user-title">
-      <h1><%=@user.username %></h1>
+      <h1><%=@user.username %> </h1>
       <%= user_tagline(@user) %>
   </div>
   <br>
@@ -12,9 +12,12 @@
     <%= user_profile(@user) %>
   </p>
 
+
   <%= user_latest_trips(@user, @latest_limit) %>
 
-  Travelogger since <%= date_long(user_join_date(@user)) %>
+
+  Travelogger since <%= date_long(user_join_date(@user)) %> 
+  
   <br><br><br>
   
  <%= add_trip_link(@user) %> <%= user_edit_link(@user, "link-as-button ghost") %>

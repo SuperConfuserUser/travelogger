@@ -1,4 +1,4 @@
-<h2>Latest Trips</h2>
+<h2><%= user_trips_count(user) %></h2>
 
   <ul class="trips">
       <%= render collection: user.trips.first(latest_limit).reverse, partial: 'trips/trips_index_li', as: :trip %>

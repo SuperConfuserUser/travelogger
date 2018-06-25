@@ -21,8 +21,12 @@ module UsersHelper
   end
 
   #INDEX and SHOW
+  def user_trips_count(user)
+    pluralize(user.trips.count, 'Trip')
+  end
+
   def user_trips_count_link(user)
-    link_to "(#{pluralize(user.trips.count, 'Trip')})", user_trips_path(user)
+    link_to "(#{user_trips_count(user)})", user_trips_path(user)
   end
 
   def user_last_active_date(user)
