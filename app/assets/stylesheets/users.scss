@@ -51,7 +51,7 @@
   width: 600px;
 }
 
-.users .link-as-button {
+.users .link-as-button, .users .add-trip {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
   border: none;
   border-radius: 20px;
@@ -61,8 +61,15 @@
   text-decoration: none;
 }
 
-.users .link-as-button:hover {
+.users .link-as-button:hover, .users .add-trip:hover {
   background: #1dc8cd;
   border-color: #1dc8cd;
   color: #fff;
+}
+
+.users .ghost {
+  background: none;
+  padding: 6px 30px;
+  border: 2px solid #666666;
+  color: #666666;
 }

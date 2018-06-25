@@ -15,8 +15,9 @@
   <%= user_latest_trips(@user, @latest_limit) %>
 
   Travelogger since <%= date_long(user_join_date(@user)) %>
-  <br><br>
+  <br><br><br>
   
- <%= user_edit_link(@user, "link-as-button") %>
+ <%= add_trip_link(@user) %> <%= user_edit_link(@user, "link-as-button ghost") %>
+
 
 </section><!-- users -->
