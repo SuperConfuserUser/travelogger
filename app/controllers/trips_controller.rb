@@ -6,6 +6,7 @@ class TripsController < ApplicationController
   # "fat models, skinny controllers"
 
   def index
+    set_user
     @categories = Category.all
     @trips = Trip.filtered_by(user: params[:user_id], category: params[:category])
   end
