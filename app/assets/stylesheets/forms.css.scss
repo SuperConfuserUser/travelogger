@@ -41,7 +41,7 @@
 .form button[type="submit"].ghost, .form input[type="submit"].ghost {
   background: none;
   padding: 6px 30px;
-  border: 2px solid #666666;
+  border: 2px solid #b3b3b3;
   color: #666666;
 }
 
@@ -73,7 +73,7 @@
 // CHECKBOX
 .form input[type="checkbox"] + label {
   text-transform: capitalize;
-  margin-right: 10px;
+  margin-right: 25px;
 }
 
 
