@@ -12,17 +12,10 @@
   Author: BootstrapMade.com
   License: https://bootstrapmade.com/license/
 */
-/*--------------------------------------------------------------
-# General
---------------------------------------------------------------*/
-body {
-  background: #fff;
-  color: #666666;
-  font-family: "Open Sans", sans-serif;
-  overflow-x: hidden;
-  margin: 0;
-}
 
+/*--------------------------------------------------------------
+# Font
+--------------------------------------------------------------*/
 a {
   color: #1dc8cd;
   transition: 0.5s;
@@ -47,25 +40,44 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
 }
 
-main {
-  padding: 30px 30px 90px 30px;
+/*--------------------------------------------------------------
+# Layout
+--------------------------------------------------------------*/
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  color: #666666;
+  font-family: "Open Sans", sans-serif;
+  overflow-x: hidden;
+}
+
+main { 
+  padding: 30px;
+}
+
+.wrapper {
+  min-height: 100%;
+  margin-bottom: -80px;
+}
+
+.push {
+  height: 80px;
 }
 
 /*--------------------------------------------------------------
 # Footer
 --------------------------------------------------------------*/
 #footer {
-  background: #fff;
-  padding: 30px;
+  background:none;
+  padding: 0 30px;
   color: #333;
   font-size: 14px;
-}
-
-.footer-fixed {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  right: 0;
+  height: 80px;
 }
 
 #footer .credits {

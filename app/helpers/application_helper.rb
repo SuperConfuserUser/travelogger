@@ -1,5 +1,9 @@
 module ApplicationHelper
   # LAYOUT
+  def shared_alert(flash_alert)
+    render 'shared/alert', flash_alert: flash_alert if flash_alert
+  end
+
   def shared_navigation
     render 'shared/navigation' if !current_page?('/')
   end
@@ -15,10 +19,6 @@ module ApplicationHelper
   def trips_navigation_link
     logged_in? ? user_trips_path(current_user) : trips_path
   end  
-
-  def shared_alert(flash_alert)
-    render 'shared/alert', flash_alert: flash_alert if flash_alert
-  end
 
   # LINKS
   def sign_up_link

@@ -17,9 +17,13 @@
 
     <%= shared_alert(flash[:alert]) %>
 
-    <%= shared_navigation %>
+    <div class="wrapper">
 
-    <%= render 'shared/main' %>
+      <%= shared_navigation %>
+
+      <%= render 'shared/main' %>
+    
+    </div>
 
     <%= render 'shared/footer' %>
 
