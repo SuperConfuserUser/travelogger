@@ -13,7 +13,7 @@
     <br>
 
     <%= f.password_field :password, placeholder: user_form_password_label(user) %>
-    <%= error_message("user_form_password_label(user)", user.errors[:password]) %>
+    <%= error_message(user_form_password_label(user), user.errors[:password]) %>
     <br>
 
     <%= f.password_field :password_confirmation, placeholder: user_form_password_confirm_label(user) %>
