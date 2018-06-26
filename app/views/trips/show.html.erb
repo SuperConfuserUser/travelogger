@@ -8,7 +8,7 @@
       <%= render 'users/user_name_link', user: @user, klass: "camo-link" %>
        <%= user_trips_count_link(@user)  %>
       <br>
-      <%= date_short(@trip.created_at) %>
+      <%= user_tagline(@user) %>
   </div>
   <br>
 
@@ -22,6 +22,8 @@
   <br><br>
 
   <p><%= @trip.note %></p>
+
+  created on <%= date_short(@trip.created_at) %>
 
   <%= trip_edit_link(@trip, "link-as-button") %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
 
