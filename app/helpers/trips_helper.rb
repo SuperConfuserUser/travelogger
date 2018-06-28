@@ -59,7 +59,7 @@ module TripsHelper
   end
 
   def trip_type_list(trip)
-    trip.categories.pluck('name').map { |name| name.capitalize }.join(', ')
+    trip.categories.pluck('name').uniq.map { |name| name.capitalize }.join(', ')
   end
 
   def trip_edit_link(trip, klass)
