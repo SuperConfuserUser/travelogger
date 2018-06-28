@@ -26,8 +26,6 @@ class TripsController < ApplicationController
       @trip.locations.build if added_location?
       render :new
     else
-      byebug
-      @trip.update(category_ids: [12]) if trip_params[:categories_attributes][:name]
       redirect_to user_trip_path(@trip.user, @trip)
     end
   end
