@@ -36,11 +36,11 @@
     <h3>Categories</h3>
 
     <!-- custom checkbox and how to display errors?? -->
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+    <%= f.collection_check_boxes :category_ids, Category.first(6), :id, :name %>
 
-    <%= f.fields_for :categories, trip.categories.build do |categories_fields| %>
+    <!-- <%= f.fields_for :categories, trip.categories.build do |categories_fields| %>
       <%= categories_fields.text_field :name, placeholder: "Custom Category" %>
-    <% end %>
+    <% end %> -->
 
     <br>
     <%= error_message("Categories", trip.errors[:categories]) %>
@@ -48,7 +48,7 @@
     <br><br>
 
     <%= f.fields_for :trip_categories, trip.trip_categories.build do |trip_categories_fields| %>
-      <%= trip_categories_fields.text_area :note, placeholder: "Trip Category Note" %>
+      <%= trip_categories_fields.text_area :note, placeholder: "Trip Category Note (optional)" %>
     <% end %>
 
       <br><br>
