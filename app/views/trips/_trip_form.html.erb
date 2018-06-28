@@ -37,16 +37,15 @@
 
     <!-- custom checkbox and how to display errors?? -->
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+
+    <%= f.fields_for :categories, trip.categories.build do |categories_fields| %>
+      <%= categories_fields.text_field :name, placeholder: "Custom Category" %>
+    <% end %>
+
+    <br>
     <%= error_message("Categories", trip.errors[:categories]) %>
+
     <br><br>
-
-    <!-- 
-      allow user to create custom category use find or create in the text field, this shouldn't be another checkbox. it's a nested form.
-
-      <%= f.fields_for :categories, trip.categories.build do |categories_fields| %>
-        <%= categories_fields.text_field :name, placeholder: "Custom Category" %>
-      <% end %> 
-  -->
 
     <%= f.submit form_submit_text(trip) %>
 

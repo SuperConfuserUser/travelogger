@@ -5,14 +5,16 @@ class Trip < ApplicationRecord
   has_many :entries
   has_many :locations, as: :place
 
-  accepts_nested_attributes_for :locations, :allow_destroy => true 
+  accepts_nested_attributes_for :locations, :allow_destroy => true
   accepts_nested_attributes_for :categories, reject_if: :all_blank
 
   validates :name, presence: true
   validate :has_location?
+  validates :locations, presence: true
   validates :start_date, presence: true
   validate :end_date_not_before_start_date
-  validate :has_category?
+  validates :categories, presence: { message: 'need to be chosen'}
+  # validate :has_category?
 
   
   before_save :reject_blank_locations!

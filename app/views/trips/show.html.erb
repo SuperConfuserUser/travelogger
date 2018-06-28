@@ -23,7 +23,9 @@
 
   <p><%= @trip.note %></p>
 
-  created on <%= date_short(@trip.created_at) %>
+  created <%= date_short(@trip.created_at) %>
+
+  <br><br>
 
   <%= trip_edit_link(@trip, "link-as-button") %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
 
