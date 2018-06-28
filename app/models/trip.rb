@@ -8,6 +8,7 @@ class Trip < ApplicationRecord
 
   accepts_nested_attributes_for :locations, :allow_destroy => true 
   accepts_nested_attributes_for :categories, reject_if: :all_blank
+  accepts_nested_attributes_for :category_descriptions, reject_if: :all_blank
 
   validates :name, presence: true
   validate :has_location?
@@ -15,7 +16,6 @@ class Trip < ApplicationRecord
   validate :end_date_not_before_start_date
   validate :has_category?
 
-  
   before_save :reject_blank_locations!
     # Use this instead of "reject_if: proc {|attributes| attributes['name'].blank?}" or "reject_if: :all_blank" to be able to create multiple blank fields for form input. Otherwise, user has to fill field, then add one by one
 
@@ -44,6 +44,11 @@ class Trip < ApplicationRecord
     if category_ids.none? # if it's only the hidden field
       errors.add(:categories, "need to be chosen")
     end
+  end
+
+  def category_description_attributes=(attributes)
+    # pattern that passes validation in rails console is: 
+    # trip.category_description.built(message: "", category: Category.obj)
   end
 
   #SCOPE
