@@ -44,11 +44,11 @@ class Trip < ApplicationRecord
   end
 
   def trip_categories_attributes=(trip_category_attributes)
-    byebug
     trip_category_attributes.values.each do |trip_category_attribute|
       trip_category = self.trip_categories.build(trip_category_attribute)
       trip_category.category_id = self.categories.first.id
       trip_category.save
+      byebug
     end
   end
 
