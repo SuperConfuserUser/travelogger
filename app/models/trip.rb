@@ -4,9 +4,11 @@ class Trip < ApplicationRecord
   has_many :categories, through: :trip_categories
   has_many :entries
   has_many :locations, as: :place
+  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :locations, :allow_destroy => true
   accepts_nested_attributes_for :categories
+  accepts_nested_attributes_for :trip_categories, reject_if: :all_blank
 
   validates :name, presence: true
   validate :has_location?
@@ -14,6 +16,7 @@ class Trip < ApplicationRecord
   validates :start_date, presence: true
   validate :end_date_not_before_start_date
   validates :categories, presence: { message: 'need to be chosen'}
+  
   
   before_save :reject_blank_locations!
     # Use this instead of "reject_if: proc {|attributes| attributes['name'].blank?}" or "reject_if: :all_blank" to be able to create multiple blank fields for form input. Otherwise, user has to fill field, then add one by one
@@ -40,10 +43,12 @@ class Trip < ApplicationRecord
     end
   end
 
-  def categories_attributes=(category_attributes)
-    category_attributes.values.each do |category_attribute|
-      category = Category.find_or_create_by(category_attribute)
-      self.categories << category if self.categories.none?{|cat| cat == category } && category.name.present?
+  def trip_categories_attributes=(trip_category_attributes)
+    byebug
+    trip_category_attributes.values.each do |trip_category_attribute|
+      trip_category = self.trip_categories.build(trip_category_attribute)
+      trip_category.category_id = self.categories.first.id
+      trip_category.save
     end
   end
 
