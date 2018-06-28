@@ -21,8 +21,23 @@
   <%= trip_type_label(@trip) %> : <%= trip_type_list(@trip) %>
   <br><br>
 
-  <p><%= @trip.note %></p>
 
+  <% if @trip.trip_categories.pluck('note').any? %>
+    <h3>Trip Category Notes</h3>
+    <ul>
+      <% @trip.trip_categories.each do |cat| %>
+        <% if cat.note? %>
+          <li><%= cat.category.name.capitalize %>: <%= cat.note %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <br><br>
+
+  <% if @trip.note? %>
+    <p><%= @trip.note %></p>
+  <% end %>
   created <%= date_short(@trip.created_at) %>
 
   <br><br>

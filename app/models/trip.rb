@@ -4,7 +4,6 @@ class Trip < ApplicationRecord
   has_many :categories, through: :trip_categories
   has_many :entries
   has_many :locations, as: :place
-  has_many :comments, dependent: :destroy
 
   accepts_nested_attributes_for :locations, :allow_destroy => true
   accepts_nested_attributes_for :categories
@@ -46,9 +45,8 @@ class Trip < ApplicationRecord
   def trip_categories_attributes=(trip_category_attributes)
     trip_category_attributes.values.each do |trip_category_attribute|
       trip_category = self.trip_categories.build(trip_category_attribute)
-      trip_category.category_id = self.categories.first.id
+      trip_category.category_id = self.categories.last.id
       trip_category.save
-      byebug
     end
   end
 
