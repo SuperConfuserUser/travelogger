@@ -1,0 +1,35 @@
+
+Requirments:
+  ☐ Must render at least one index page (index resource - 'list of things') via jQuery and an Active Model Serialization JSON Backend. 
+
+  ☐ Must render at least one show page (show resource - 'one specific thing') via jQuery and an Active Model Serialization JSON Backend. (next button)
+
+  ☐ The rails API must reveal at least one has-many relationship in the JSON that is then rendered to the page. (can add the has many obj to the main show page)
+
+  ☐ Must use your Rails API and a form to create a resource and render the response without a page refresh.
+  
+  ☐ Must translate the JSON responses into Javascript Model Objects. The Model Objects must have at least one method on the prototype. Formatters work really well for this.
+
+Instructions:
+  ☐ Make the changes to your existing Rails assessment repo.
+
+  ☐ Add the spec-js.md file from this repo to the root directory of the project, commit it to Git and push it up to GitHub.
+
+  ☐ Submit that repo to the assessment immediately.
+
+  ☐ Make sure to commit early and commit often. Commit messages should be meaningful (clearly describe what you're doing in the commit) and accurate (there should be nothing in the commit that doesn't match the description in the commit message).
+
+  ☐ [Fill out this checklist.](https://docs.google.com/forms/d/1lHZBZVecIvIBZsiHJ-PHWCzgdzRIh1ojxTnEVCWcA2E/)
+  
+  ☐ Record at least a 30 min coding session. During the session, either think out loud or not. It's up to you. You don't need to submit it, but we may ask for it at a later time.
+
+  ☐ Submit a video of how a user would interact with your working application.
+
+  ☐ Make sure to check each box in your spec.md (replace the space between the square braces with an x) and explain next to each one how you've met the requirement before you submit your project.
+
+  ☐ Submit the url to your github project
+
+  ☐ Write a blog post about the project and process.
+
+  
+

@@ -53,7 +53,6 @@ class Trip < ApplicationRecord
 
   #SCOPE
 
-
   scope :by_order, -> (order) { order(created_at: order) }
   scope :by_user, -> (user_id) { where(user: user_id) }
   scope :by_category, -> (category_name) { joins(:categories).where('categories.name' => category_name) }

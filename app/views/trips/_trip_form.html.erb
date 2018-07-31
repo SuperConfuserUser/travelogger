@@ -41,7 +41,10 @@
     <br><br>
 
     <!-- 
+      TODO:
       allow user to create custom category use find or create in the text field, this shouldn't be another checkbox. it's a nested form.
+
+      add this field after the checkboxes. show on checkbox: true. use the JS power
 
       <%= f.fields_for :categories, trip.categories.build do |categories_fields| %>
         <%= categories_fields.text_field :name, placeholder: "Custom Category" %>
@@ -53,3 +56,5 @@
   <% end %>
 
 </div>
+
+  
