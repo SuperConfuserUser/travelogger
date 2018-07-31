@@ -51,6 +51,12 @@
       <% end %> 
   -->
 
+  <br><br>
+
+  <%= f.fields_for :trip_categories, trip.trip_categories.build do |trip_categories_fields| %>
+    <%= trip_categories_fields.text_area :note, placeholder: "Trip Category Note (optional)" %>
+  <% end %>
+
     <%= f.submit form_submit_text(trip) %>
 
   <% end %>
