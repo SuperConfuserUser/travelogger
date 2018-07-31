@@ -4,7 +4,7 @@
 
 <br> <br> or Use Email <br><br>
 
-<%= error_alert(@user.errors) %>
+<%= error_alert(@user.errors, true) %>
 
 <div class="form">
   <%= form_for @user, url: login_path, method: :post do |f| %>

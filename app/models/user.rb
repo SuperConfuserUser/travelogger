@@ -23,7 +23,7 @@ class User < ApplicationRecord
       u.password =  SecureRandom.hex
     end
 
-    user.errors.add(:base, "Something went wrong with using your Facebook account") if user.invalid?
+    user.errors.add(:base, "Login did not work") if user.invalid?
     
     return user
   end
