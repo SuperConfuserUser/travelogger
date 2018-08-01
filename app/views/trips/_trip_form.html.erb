@@ -10,6 +10,7 @@
     <br>
   
     <!-- how to call only the first field or makes sure it runs once -->
+    <!-- name = "trip[locations_attributes][0][name]" id="trip_locations_attributes_0_name" -->
     <%= f.fields_for :locations do |location_form| %>
       <%= add_error_div(trip.errors[:locations].any?) do %>
         <%= location_form.text_field :name, placeholder: "Location" %>
@@ -36,10 +37,21 @@
     <h3>Categories</h3>
 
     <!-- custom checkbox and how to display errors?? -->
-    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name %>
+        <!-- name = "trip[locations_attributes][0][name]" id="trip_locations_attributes_0_name" -->
+
+    <%= f.collection_check_boxes :category_ids, Category.all, :id, :name do |category| 
+    %>
+      <%= category.check_box %> <%= category.label %>
+      <div id="category_description_<%= category.value %>"></div>
+    <% end %>
     <%= error_message("Categories", trip.errors[:categories]) %>
     <br><br>
 
+    <a id="test">test</a>
+    <!-- trip.trip_categories.build(category_id: <pull from data-category_id)>, description: <value from the text input>).save -->
+
+    <h1>Home Page</h1>
+    <a href="#" id="hide_this">Click to Hide Me</a>
     <!-- 
       TODO:
       allow user to create custom category use find or create in the text field, this shouldn't be another checkbox. it's a nested form.
@@ -53,9 +65,9 @@
 
   <br><br>
 
-  <%= f.fields_for :trip_categories, trip.trip_categories.build do |trip_categories_fields| %>
-    <%= trip_categories_fields.text_area :note, placeholder: "Trip Category Note (optional)" %>
-  <% end %>
+  <!-- <%= f.fields_for :trip_categories, trip.trip_categories.build do |trip_categories_fields| %>
+    <%= trip_categories_fields.text_area :description, placeholder: "Trip Category Note (optional)" %>
+  <% end %> -->
 
     <%= f.submit form_submit_text(trip) %>
 
