@@ -1,5 +1,10 @@
-$(function(){
-  $("input.toggle").on("change", function(){
-    $(this).parents("form").trigger("submit")
-  })
-});
+// javascript is super weird
+
+const attachListeners = () => {
+  $('#hide_this').on('click', () => hideWhenClicked('#hide_this'));
+  $('#test').on('click', () => alert("whee!"));
+}
+
+$(attachListeners);
+
+const hideWhenClicked = el => $(el).hide();
