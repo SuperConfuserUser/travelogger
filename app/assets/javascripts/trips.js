@@ -4,11 +4,15 @@
 
 class Trip {
   constructor() {
-
+    
   }
 
-  foobar() {
-    console.log(this);
+  renderIndexLi() {
+    const source   = $('#trip-index-li-template').html();
+    const template = Handlebars.compile(source);
+    const context = {id: this.id, userId: this.user_id, userImage: this.user.image, name: this.name, userUserName: this.user.username, locations: this.locations, date: this.start_date};
+    const html    = template(context);
+    return html;
   }
 }
 
@@ -53,14 +57,14 @@ function runTest() {
 
 const loadTripsIndex = () => {
   const $wrapper = $('#trips-list');
-  $wrapper.empty();
+  // $wrapper.empty();
 
   const listing = $.getJSON("/trips", (trips) => {
     let html = "";
     trips.forEach(json => {
       const trip = Object.assign(new Trip, json);
-       html += `<li>${trip.name}</li>`;
-    })
+        html += trip.renderIndexLi();
+      })
     $wrapper.append(html);
   })
 }
@@ -74,3 +78,14 @@ const loadTripsIndex = () => {
      on <%= date_long(trip.start_date) %>
   </div><!-- list-description -->
 </li> */}
+
+// nested options for links and trip label
+// def trip_label(trip)
+//     if nested?
+//       trip_location_list(trip)
+//     else
+//       render layout: 'users/user_name_link', locals: { user: trip.user, klass: "camo-link strong" } do
+//         " " + trip_location_list(trip)
+//       end
+//     end 
+//   end 

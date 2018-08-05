@@ -9,13 +9,27 @@
     <%= render collection: @categories, partial: 'trips/trip_category', as: :category, locals: {user: @user} %>
   </div><!-- trip-navigation -->
   
-  <!-- <ul>
-    <% render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
-  </ul> -->
+  <ul>
+    <%= render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
+  </ul>
 
   <ul id="trips-list"></ul>
   
 </section><!-- trips -->
+
+
+<script id="trip-index-li-template" type="text/x-handlebars-template">
+  <li>
+    <a href="/users/{{userId}}">
+      <img class="list-avatar" src="{{userImage}}">
+    </a>
+      <div class="list-description">
+        <a class="list-title" href="/users/{{userId}}/trips/{{id}}">{{name}}</a>
+        <a class="camo-link strong" href="/users/{{userId}}">{{userUserName}}</a> {{locations}}
+         on {{date}}
+      </div><!-- list-description -->
+    </li>
+</script>
 
 
 
