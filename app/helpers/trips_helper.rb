@@ -14,7 +14,8 @@ module TripsHelper
   end
 
   def add_trip_link(user)
-    add_trip_link = link_to "New trip", new_user_trip_path(current_user), class: "add-trip" if logged_in?
+    # add_trip_link = link_to "+", new_user_trip_path(current_user), class: "add-trip" if logged_in?
+    add_trip_link = link_to "New Trip", new_user_trip_path(current_user), class: "link-as-button" if logged_in?
     if user 
       add_trip_link if authorized?(user) 
     else
@@ -24,9 +25,11 @@ module TripsHelper
 
   def trip_label(trip)
     if nested?
-      "at " + trip_location_list(trip)
+      trip_location_list(trip)
     else
-      render 'users/user_name_link', user: trip.user, klass: "camo-link" 
+      render layout: 'users/user_name_link', locals: { user: trip.user, klass: "camo-link strong" } do
+        " " + trip_location_list(trip)
+      end
     end 
   end 
   

@@ -8,12 +8,23 @@
   margin-bottom: 36px;
 }
 
-.trips .add-trip, .trips .link-as-button {
+.trips .link-as-button {
   background: linear-gradient(45deg, #1de099, #1dc8cd);
   border: none;
   border-radius: 20px;
   padding: 8px 30px;
   margin: 0 5px 5px 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.trips .add-trip {
+  background: linear-gradient(45deg, #1de099, #1dc8cd);
+  border: none;
+  border-radius: 20px;
+  padding: 5px 12px;
+  margin: 0 5px 5px 0;
+  font-weight: 700;
   color: #fff;
   text-decoration: none;
 }
