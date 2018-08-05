@@ -11,28 +11,22 @@ class Trip {
   longDate(sysDate) {
     const currentYear = (new Date).getFullYear();
     const date = new Date(sysDate);
-    
-    if(date.getFullYear() === currentYear) { 
-      return date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' }); // Month 1
-    } else {
-      return date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', year: 'numeric' }); //Month 1, 2000
-    }
+
+    return date.getFullYear() === currentYear ?
+      date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' }) : // Month 1
+      date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', year: 'numeric' }); //Month 1, 2000
   }
 
   tripDateRange() {
-    if (this.end_date == null) {
-      return this.longDate(this.start_date);
-    } else {
-      return this.longDate(this.start_date) + " to " + this.longDate(this.end_date);
-    }
+    return this.end_date == null ?
+      this.longDate(this.start_date) :
+      this.longDate(this.start_date) + " to " + this.longDate(this.end_date);
   }
 
   userImage() {
-    if(this.user.image.startsWith('http')) {
-      return this.user.image;
-    } else {
-      return "/assets/" + this.user.image;   //adding full path to the default image
-    }
+    return this.user.image.startsWith('http') ? //checks if image is internal or external
+      this.user.image :
+      "/assets/" + this.user.image;             //adding path to the default image
   }
 
   locationList() {
