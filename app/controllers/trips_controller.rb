@@ -9,11 +9,15 @@ class TripsController < ApplicationController
     set_user
     @categories = Category.all
     @trips = Trip.filtered_by(user: params[:user_id], category: params[:category])
+    respond_to do |format|
+      format.html { render :index }
+      format.json { render json: @trips }
+    end
   end
 
   def show
     respond_to do |format|
-      format.html { render :show}
+      format.html { render :show }
       format.json { render json: @trip }
     end
   end

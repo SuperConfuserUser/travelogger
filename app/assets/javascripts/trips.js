@@ -12,21 +12,6 @@ class Trip {
   }
 }
 
-// play code
-
-function runTest() {
-  let a = new Trip;
-  return a.foobar();
-}
-
-const attachListeners = () => {
-  $('#hide_this').on('click', () => hideWhenClicked('#hide_this'));
-  $('#test').on('click', testClass);
-}
-
-$(attachListeners);
-
-const hideWhenClicked = el => $(el).hide();
 
 // assign page specific behavior on document.ready
 
@@ -35,7 +20,7 @@ $(() => {
 
   switch(page) {
     case "trips-index":
-      alert("I'm in " + page)
+      loadTripsIndex();
       break;
     case "trips-show":
       alert("I'm in " + page)
@@ -46,13 +31,31 @@ $(() => {
   }
 })
 
+
+//play code 
+
+const attachListeners = () => {
+  $('#hide_this').on('click', () => hideWhenClicked('#hide_this'));
+  $('#test').on('click', runTest);
+}
+
+$(attachListeners);
+
+const hideWhenClicked = el => $(el).hide();
+
+function runTest() {
+  let a = new Trip;
+  return a.foobar();
+}
+
+
 // index
 
 const loadTripsIndex = () => {
   const wrapper = $('#trips-list');
   wrapper.empty();
 
-  let listing = listing || $.getJSON("/trips", (trips) => {
-    // set data and templates now
+  let listing = $.getJSON("/trips", (trips) => {
+    // format data and append to wrapper
   })
 }
