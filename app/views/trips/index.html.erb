@@ -9,10 +9,14 @@
     <%= render collection: @categories, partial: 'trips/trip_category', as: :category, locals: {user: @user} %>
   </div><!-- trip-navigation -->
   
-  <ul>
-    <%= render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
-  </ul>
+  <!-- <ul>
+    <% render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
+  </ul> -->
 
+  <a href="#" id="test">test classes</a>
+
+  <ul id="trips-list"></ul>
+  
 </section><!-- trips -->
 
 
