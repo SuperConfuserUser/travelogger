@@ -52,10 +52,17 @@
 //   text-decoration: none;
 // }
 
-.trips .trip-category:hover, .trips .add-trip:hover, .trips .link-as-button:hover {
+.trips .trip-category:hover, .trips .add-trip:hover, .trips .link-as-button:hover, {
   background: #1dc8cd;
   border-color: #1dc8cd;
   color: #fff;
+}
+
+.trips .current {
+  background: rgb(229, 255, 0);
+  border-color: rgb(229, 255, 0);
+  color: #666;
+  transition: none;
 }
 
 .trips ul {

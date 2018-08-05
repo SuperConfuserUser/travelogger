@@ -4,14 +4,14 @@
   <div class="trip-navigation">
     <%= add_trip_link(@user) %>
 
-    <%= link_to "All", trips_all_link(@user), class: "trip-category" %>
+    <%= link_to "All", trips_all_link(@user), class: "trip-category", id: "default-selection" %>
 
     <%= render collection: @categories, partial: 'trips/trip_category', as: :category, locals: {user: @user} %>
   </div><!-- trip-navigation -->
   
-  <ul>
-    <%= render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
-  </ul>
+  <!-- <ul>
+    <% render collection: @trips, partial: 'trips/trips_index_li', as: :trip %>
+  </ul> -->
 
   <ul id="trips-list"></ul>
   

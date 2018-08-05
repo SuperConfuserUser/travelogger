@@ -56,6 +56,7 @@ $(() => {
   switch(page) {
     case 'trips-index':
       attachTripIndexListeners();
+      setTripCurrentFilter();
       loadTripsIndex();
       break;
     case 'trips-show':
@@ -86,18 +87,31 @@ function runTest() {
 
 // index
 
+const filters = () => {
+  return $('a.trip-category');
+}
+
 const attachTripIndexListeners = () => {
-    $('a.trip-category').on('click', function (e) {  //using old skool function for specific this binding
+    filters().on('click', function (e) {  //using old skool function for specific this binding
     const filterPath = this.attributes.href.value;
     e.preventDefault();
+    setTripCurrentFilter(this)
     loadTripsIndex(filterPath);
   })
+}
+
+const setTripCurrentFilter = (current = 'a#default-selection') => {
+  for(const filter of filters()) {
+    $(filter).removeClass("current")
+  }
+
+  $(current).addClass("current")
 }
 
 const loadTripsIndex = (indexPath = window.location.pathname + window.location.search) => {
   const $container = $('ul#trips-list');
   $container.empty();
-  
+
   $.getJSON(indexPath, trips => {
     trips.forEach( json => {
       const trip = Object.assign(new Trip, json);
