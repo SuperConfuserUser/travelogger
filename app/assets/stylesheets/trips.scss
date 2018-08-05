@@ -41,6 +41,11 @@
   text-decoration: none;
 }
 
+.trips .next, .trips .prev {
+  font-weight: 700;
+  padding: 6px 20px;
+}
+
 // filled version
 // .trips .trip-category {
 //   background: #dddddd;
