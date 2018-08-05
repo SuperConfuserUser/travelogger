@@ -12,6 +12,10 @@ class TripsController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html { render :show}
+      format.json { render json: @trip }
+    end
   end
 
   def new
@@ -60,7 +64,7 @@ class TripsController < ApplicationController
   end
 
   def trip_params
-    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], categories_attributes: [:name], locations_attributes: [:id, :name, :_destroy])
+    params.require(:trip).permit(:name, :start_date, :end_date, :note, :user_id, category_ids: [], trip_category_attributes: [:category_id, :description, :_destroy],  locations_attributes: [:id, :name, :_destroy])
   end
 
   def added_location?
