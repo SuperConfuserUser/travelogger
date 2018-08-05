@@ -12,14 +12,12 @@ class Trip {
   }
 }
 
-function testClass() {
+// play code
+
+function runTest() {
   let a = new Trip;
   return a.foobar();
 }
-
-$(testClass);
-
-// DOM
 
 const attachListeners = () => {
   $('#hide_this').on('click', () => hideWhenClicked('#hide_this'));
@@ -30,8 +28,26 @@ $(attachListeners);
 
 const hideWhenClicked = el => $(el).hide();
 
+// assign page specific behavior on document.ready
+
+$(() => {
+  const page = $('section').attr('data-page');
+
+  switch(page) {
+    case "trips-index":
+      alert("I'm in " + page)
+      break;
+    case "trips-show":
+      alert("I'm in " + page)
+      break;
+    case "trips-form":
+      alert("I'm in " + page)
+      break;
+  }
+})
+
 // index
-// do this on doc ready? should JS be separated for each Trip page (index, show, create)
+
 const loadTripsIndex = () => {
   const wrapper = $('#trips-list');
   wrapper.empty();
