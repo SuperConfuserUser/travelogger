@@ -4,11 +4,11 @@
 
 class Trip {
   constructor() {
-    this.foo = "bar";
+
   }
 
   foobar() {
-    alert(this.foo);
+    console.log(this);
   }
 }
 
@@ -52,10 +52,25 @@ function runTest() {
 // index
 
 const loadTripsIndex = () => {
-  const wrapper = $('#trips-list');
-  wrapper.empty();
+  const $wrapper = $('#trips-list');
+  $wrapper.empty();
 
-  let listing = $.getJSON("/trips", (trips) => {
-    // format data and append to wrapper
+  const listing = $.getJSON("/trips", (trips) => {
+    let html = "";
+    trips.forEach(json => {
+      const trip = Object.assign(new Trip, json);
+       html += `<li>${trip.name}</li>`;
+    })
+    $wrapper.append(html);
   })
 }
+
+{/* <li>
+  <%= render 'users/user_avatar_link', user: trip.user, klass: "list-avatar" %>
+
+  <div class="list-description">
+    <%= link_to trip.name, user_trip_path(trip.user, trip), class: "list-title" %>
+    <%= trip_label(trip) %>
+     on <%= date_long(trip.start_date) %>
+  </div><!-- list-description -->
+</li> */}
