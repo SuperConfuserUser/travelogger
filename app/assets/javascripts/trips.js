@@ -96,14 +96,15 @@ function runTest() {
 
 const loadTripsIndex = () => {
   const $wrapper = $('#trips-list');
-  // $wrapper.empty();
+  const indexPath = window.location.pathname + window.location.search;
+  $wrapper.empty();
 
-  const listing = $.getJSON('/trips', (trips) => {
+  $.getJSON(indexPath, (trips) => {
     let html = "";
     trips.forEach(json => {
       const trip = Object.assign(new Trip, json);
-        html += trip.renderIndexLi();
-      })
-    $wrapper.append(html);
+      html += trip.renderIndexLi();
+    })
   })
+    .done($wrapper.append(html);)
 }

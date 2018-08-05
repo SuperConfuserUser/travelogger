@@ -24,14 +24,13 @@
       <img class="list-avatar" src="{{userImage}}">
     </a>
       <div class="list-description">
-        <a class="list-title" href="/users/{{userId}}/trips/{{id}}">{{name}}</a>
-        <a class="camo-link strong" href="/users/{{userId}}">{{userUserName}}</a> {{locations}}
-         on {{date}}
+        {{#if <%= nested? %>}}
+          <a class="list-title" href="/users/{{userId}}/trips/{{id}}">{{name}}</a>
+          {{locations}} on {{date}}
+        {{else}}
+          <a class="list-title" href="/trips/{{id}}">{{name}}</a>
+          <a class="camo-link strong" href="/users/{{userId}}">{{userUserName}}</a> {{locations}} on {{date}}
+        {{/if}}
       </div><!-- list-description -->
     </li>
 </script>
-
-
-
-
-
