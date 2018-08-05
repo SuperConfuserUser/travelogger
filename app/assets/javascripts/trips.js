@@ -7,10 +7,40 @@ class Trip {
     
   }
 
+  // this would ideally be in app.js
+  longDate(sysDate) {
+    const currentYear = (new Date).getFullYear();
+    const date = new Date(sysDate);
+    
+    if(date.getFullYear() === currentYear) {
+      return date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' }); //Month 1
+    } else {
+      return date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', year: 'numeric' }); //Month 1, 2000
+    }
+  }
+
+  tripDateRange() {
+    debugger
+    if (this.end_date == null) {
+      return this.longDate(this.start_date);
+    } else {
+      return this.longDate(this.start_date) + " to " + this.longDate(this.end_date);
+    }
+  }
+
+  userImage() {
+    debugger
+    if(this.user.image.startsWith('http')) {
+      return this.user.image;
+    } else {
+      return "/assets/" + this.user.image;
+    }
+  }
+
   renderIndexLi() {
     const source   = $('#trip-index-li-template').html();
     const template = Handlebars.compile(source);
-    const context = {id: this.id, userId: this.user_id, userImage: this.user.image, name: this.name, userUserName: this.user.username, locations: this.locations, date: this.start_date};
+    const context = { id: this.id, userId: this.user_id, userImage: this.userImage(), name: this.name, userUserName: this.user.username, locations: this.locations, date: this.tripDateRange() };
     const html    = template(context);
     return html;
   }
@@ -23,13 +53,13 @@ $(() => {
   const page = $('section').attr('data-page');
 
   switch(page) {
-    case "trips-index":
+    case 'trips-index':
       loadTripsIndex();
       break;
-    case "trips-show":
+    case 'trips-show':
       alert("I'm in " + page)
       break;
-    case "trips-form":
+    case 'trips-form':
       alert("I'm in " + page)
       break;
   }
@@ -59,7 +89,7 @@ const loadTripsIndex = () => {
   const $wrapper = $('#trips-list');
   // $wrapper.empty();
 
-  const listing = $.getJSON("/trips", (trips) => {
+  const listing = $.getJSON('/trips', (trips) => {
     let html = "";
     trips.forEach(json => {
       const trip = Object.assign(new Trip, json);
