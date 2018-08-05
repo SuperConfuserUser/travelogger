@@ -4,7 +4,7 @@
 
 class Trip {
   constructor() {
-    
+
   }
 
   // this would ideally be in app.js
@@ -47,11 +47,9 @@ class Trip {
   }
 
   renderIndexLi() {
-    const source   = $('#trip-index-li-template').html();
-    const template = Handlebars.compile(source);
+    const template = Handlebars.compile($('#trip-index-li-template').html());
     const context = { id: this.id, userId: this.user_id, userImage: this.userImage(), name: this.name, userUserName: this.user.username, locations: this.locationList(), date: this.tripDateRange() };
-    const html    = template(context);
-    return html;
+    return template(context);
   }
 }
 
@@ -63,6 +61,7 @@ $(() => {
 
   switch(page) {
     case 'trips-index':
+      attachTripIndexListeners();
       loadTripsIndex();
       break;
     case 'trips-show':
@@ -87,24 +86,28 @@ $(attachListeners);
 const hideWhenClicked = el => $(el).hide();
 
 function runTest() {
-  let a = new Trip;
-  return a.foobar();
+  alert("clicked!");
 }
 
 
 // index
 
-const loadTripsIndex = () => {
-  const $wrapper = $('#trips-list');
-  const indexPath = window.location.pathname + window.location.search;
-  $wrapper.empty();
+const attachTripIndexListeners = () => {
+    $('a.trip-category').on('click', function (e) {  //using old skool function for specific this binding
+    const filterPath = this.attributes.href.value;
+    e.preventDefault();
+    loadTripsIndex(filterPath);
+  })
+}
 
-  $.getJSON(indexPath, (trips) => {
-    let html = "";
-    trips.forEach(json => {
+const loadTripsIndex = (indexPath = window.location.pathname + window.location.search) => {
+  const $container = $('ul#trips-list');
+  $container.empty();
+  
+  $.getJSON(indexPath, trips => {
+    trips.forEach( json => {
       const trip = Object.assign(new Trip, json);
-      html += trip.renderIndexLi();
+      $container.append(trip.renderIndexLi());
     })
   })
-    .done($wrapper.append(html);)
 }
