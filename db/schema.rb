@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_05_015335) do
+ActiveRecord::Schema.define(version: 2018_08_05_015824) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2018_08_05_015335) do
     t.string "description"
     t.index ["category_id"], name: "index_trip_categories_on_category_id"
     t.index ["trip_id"], name: "index_trip_categories_on_trip_id"
+  end
+
+  create_table "trip_locations", force: :cascade do |t|
+    t.integer "trip_id"
+    t.integer "location_id"
+    t.index ["location_id"], name: "index_trip_locations_on_location_id"
+    t.index ["trip_id"], name: "index_trip_locations_on_trip_id"
   end
 
   create_table "trips", force: :cascade do |t|
