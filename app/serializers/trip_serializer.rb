@@ -4,5 +4,5 @@ class TripSerializer < ActiveModel::Serializer
   has_many :trip_categories, serializer: TripTripCategorySerializer
   has_many :locations, serializer: TripLocationsExplicitSerializer
   
-  attributes :id, :name, :start_date, :end_date, :note, :user_id
+  attributes :id, :name, :start_date, :end_date, :note, :user_id, :created_at
 end
