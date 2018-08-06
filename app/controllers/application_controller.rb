@@ -30,7 +30,6 @@ class ApplicationController < ActionController::Base
 
 
   def require_login
-    # flash[:alert] = 'Login required.'
     redirect_back fallback_location: root_path, alert: "Login required."
   end
 
