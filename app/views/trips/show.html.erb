@@ -34,8 +34,7 @@
 </section><!-- trips -->
 
 <script id="trip-show-template" type="text/x-handlebars-template">
-<h2>JS version</h2>
-  <h1>{{trip.title}}</h1>
+  <h1>{{trip.name}}</h1>
 
   <a href="/users/{{trip.user_id}}">
   <img class="list-avatar" src="{{userImage}}">
@@ -50,13 +49,13 @@
   </div>
   <br>
 
-  Location: {{locations}}
+  {{locationsLabel}}: {{locations}}
   <br>
 
   Date: {{date}}
   <br>
 
-  Types: {{categories}}
+  {{categoriesLabel}}: {{categories}}
   <br><br>
 
   <p>{{trip.note}}</p>

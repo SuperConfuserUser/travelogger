@@ -7,7 +7,20 @@ class Trip {
 
   }
 
-  // this would ideally be in app.js
+  // these would ideally be in app.js
+  capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
+  }
+
+  listerizer(list) {
+    if(list.length <= 2) {
+      return list.join(" and ");
+    } else {
+      list[list.length - 1] = "and " + list[list.length - 1];
+      return list.join(", ");
+    }
+  }
+
   longDate(sysDate) {
     const currentYear = (new Date).getFullYear();
     const date = new Date(sysDate);
@@ -17,10 +30,23 @@ class Trip {
       date.toLocaleDateString('en-us', { month: 'long', day: 'numeric', year: 'numeric' }); //Month 1, 2000
   }
 
+  shortDate(sysDate) {
+    const currentYear = (new Date).getFullYear();
+    const date = new Date(sysDate);
+
+    return date.getFullYear() === currentYear ?
+      date.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) : // Mon 1
+      date.toLocaleDateString('en-us', { month: 'short', day: 'numeric', year: 'numeric' }); //Mon 1, 2000
+  }
+
   tripDateRange() {
     return this.end_date == null ?
       this.longDate(this.start_date) :
       this.longDate(this.start_date) + " to " + this.longDate(this.end_date);
+  }
+
+  createdDate() {
+    return this.shortDate(this.created_at);
   }
 
   userImage() {
@@ -29,33 +55,46 @@ class Trip {
       "/assets/" + this.user.image;             //adding path to the default image
   }
 
-  locationList() {
-    const locations = this.locations.map( location => location.name );
-    
-    if(locations.length <= 2) {
-      return locations.join(" and ");
-    } else {
-      locations[locations.length - 1] = "and " + locations[locations.length - 1];
-      return locations.join(", ");
-    }
-  }
-
-  categoriesList() {
-    return 'whee';
-  }
-
-  createdDate() {
-    return 'whee';
-  }
-
   userTripCount() {
-    return 'whee';
+    const count = this.user.trips.length;
+    return count === 1 ?
+      count + " Trip" :
+      count + " Trips";
   }
 
   userTagline() {
     return this.user.tagline ?
       this.user.tagline :
       `<a href="/users/${this.user_id}/edit">Add tagline</a>`;
+  }
+
+  locationList() {
+    const locations = this.locations.map( location => location.name );
+    return this.listerizer(locations);
+  }
+
+  categoriesList() {
+    const categoryList = [];
+    for(const category of this.categories) {
+      for(const tc of this.trip_categories) {
+        tc.category_id === category.id && tc.description ?
+          categoryList.push(this.capitalize(category.name) + ": " + tc.description + "") :
+          categoryList.push(this.capitalize(category.name));
+      }
+    }
+    return this.listerizer(categoryList);
+  }
+
+  locationsLabel() {
+    return this.locations.length > 1 ?
+      "Locations" :
+      "Location";
+  }
+
+  categoriesLabel() {
+    return this.categories.length > 1 ?
+      "Types" :
+      "Type";
   }
 
   renderIndexLi() {
@@ -66,7 +105,7 @@ class Trip {
 
   renderShow() {
     const template = Handlebars.compile($('#trip-show-template').html());
-    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline() };
+    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel() };
     return template(context);
   }
 }
@@ -134,7 +173,6 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
 }
 
 const loadTripsIndex = (path = window.location.pathname + window.location.search) => {
-  debugger
   const $container = $('ul#trips-list');
   $container.empty();
 
@@ -159,7 +197,7 @@ const attachTripShowListeners = () => {
 
 const loadTripsShow = (path = window.location.pathname + window.location.search) => {
   const $container = $('section#trip-show-container');
-  // $container.empty();
+  $container.empty();
 
   $.getJSON(path, json => {
       const trip = Object.assign(new Trip, json);
