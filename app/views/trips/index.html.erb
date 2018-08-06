@@ -20,16 +20,16 @@
 
 <script id="trip-index-li-template" type="text/x-handlebars-template">
   <li>
-    <a href="/users/{{userId}}">
+    <a href="/users/{{trip.user_id}}">
       <img class="list-avatar" src="{{userImage}}">
     </a>
       <div class="list-description">
         {{#if <%= nested? %>}}
-          <a class="list-title" href="/users/{{userId}}/trips/{{id}}">{{name}}</a>
+          <a class="list-title" href="/users/{{trip.user_id}}/trips/{{trip.id}}">{{trip.name}}</a>
           {{locations}} on {{date}}
         {{else}}
-          <a class="list-title" href="/trips/{{id}}">{{name}}</a>
-          <a class="camo-link strong" href="/users/{{userId}}">{{userUserName}}</a> {{locations}} on {{date}}
+          <a class="list-title" href="/trips/{{trip.id}}">{{trip.name}}</a>
+          <a class="camo-link strong" href="/users/{{trip.user_id}}">{{trip.user.username}}</a> {{locations}} on {{date}}
         {{/if}}
       </div><!-- list-description -->
     </li>
