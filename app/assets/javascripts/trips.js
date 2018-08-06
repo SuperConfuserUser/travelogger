@@ -40,9 +40,33 @@ class Trip {
     }
   }
 
+  categoriesList() {
+    return 'whee';
+  }
+
+  createdDate() {
+    return 'whee';
+  }
+
+  userTripCount() {
+    return 'whee';
+  }
+
+  userTagline() {
+    return this.user.tagline ?
+      this.user.tagline :
+      `<a href="/users/${this.user_id}/edit">Add tagline</a>`;
+  }
+
   renderIndexLi() {
     const template = Handlebars.compile($('#trip-index-li-template').html());
-    const context = { id: this.id, userId: this.user_id, userImage: this.userImage(), name: this.name, userUserName: this.user.username, locations: this.locationList(), date: this.tripDateRange() };
+    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange() };
+    return template(context);
+  }
+
+  renderShow() {
+    const template = Handlebars.compile($('#trip-show-template').html());
+    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline() };
     return template(context);
   }
 }
@@ -60,7 +84,8 @@ $(() => {
       loadTripsIndex();
       break;
     case 'trips-show':
-      alert("I'm in " + page)
+      loadTripsShow();
+      // attachTripShowListeners();
       break;
     case 'trips-form':
       alert("I'm in " + page)
@@ -108,14 +133,36 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
   $(current).addClass("current")
 }
 
-const loadTripsIndex = (indexPath = window.location.pathname + window.location.search) => {
+const loadTripsIndex = (path = window.location.pathname + window.location.search) => {
+  debugger
   const $container = $('ul#trips-list');
   $container.empty();
 
-  $.getJSON(indexPath, trips => {
+  $.getJSON(path, trips => {
     trips.forEach( json => {
       const trip = Object.assign(new Trip, json);
       $container.append(trip.renderIndexLi());
     })
+  })
+}
+
+// show
+
+const attachTripShowListeners = () => {
+
+  $('.prev, .next').on('click', function (e) {
+    e.preventDefault();
+    debugger
+    runTest();
+  })
+}
+
+const loadTripsShow = (path = window.location.pathname + window.location.search) => {
+  const $container = $('section#trip-show-container');
+  // $container.empty();
+
+  $.getJSON(path, json => {
+      const trip = Object.assign(new Trip, json);
+      $container.append(trip.renderShow());
   })
 }
