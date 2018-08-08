@@ -4,7 +4,6 @@
 
 class Trip {
   constructor() {
-
   }
 
   // these would ideally be in app.js
@@ -168,11 +167,14 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
   for(const filter of filters()) {
     $(filter).removeClass("current")
   }
-
   $(current).addClass("current")
 }
 
-const loadTripsIndex = (path = window.location.pathname + window.location.search) => {
+const getPath = () => {
+  return window.location.pathname + window.location.search;
+}
+
+const loadTripsIndex = (path = getPath()) => {
   const $container = $('ul#trips-list');
   $container.empty();
 
@@ -181,7 +183,7 @@ const loadTripsIndex = (path = window.location.pathname + window.location.search
       const trip = Object.assign(new Trip, json);
       $container.append(trip.renderIndexLi());
     })
-  })
+  })  
 }
 
 // show
@@ -195,10 +197,9 @@ const attachTripShowListeners = () => {
   })
 }
 
-const loadTripsShow = (path = window.location.pathname + window.location.search) => {
+const loadTripsShow = (path = getPath()) => {
   const $container = $('section#trip-show-container');
   $container.empty();
-
   $.getJSON(path, json => {
       const trip = Object.assign(new Trip, json);
       $container.append(trip.renderShow());
