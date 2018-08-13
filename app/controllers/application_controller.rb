@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
   end
 
   def nested?
-    !!(params[:user_id] || params[:id])
+    # !!(params[:user_id] || params[:id])
+    !!params[:user_id]
   end
 
   private
