@@ -84,7 +84,7 @@ class TripsController < ApplicationController
   end
 
   def user_url_validation
-    if user_id
+    if nested?
       set_user
       redirect_to trips_path, alert: "User not found." and return if !@user
     end
