@@ -2,13 +2,13 @@
 
   <h1><%= @trip.name %></h1>
 
-  <%= render 'users/user_avatar_link', user: @user, klass: "list-avatar" %>
+  <%= render 'users/user_avatar_link', user: @trip.user, klass: "list-avatar" %>
 
   <div>
-      <%= render 'users/user_name_link', user: @user, klass: "camo-link" %>
-       <%= user_trips_count_link(@user)  %>
+      <%= render 'users/user_name_link', user: @trip.user, klass: "camo-link" %>
+       <%= user_trips_count_link(@trip.user)  %>
       <br>
-      <%= user_tagline(@user) %>
+      <%= user_tagline(@trip.user) %>
   </div>
   <br>
 
@@ -25,12 +25,15 @@
 
   created on <%= date_short(@trip.created_at) %>
   
-  <br><br>
-  <%= trip_edit_link(@trip, "link-as-button") %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
+  <% if authorized?(@trip.user) %>
+    <br><br>
+    <%= trip_edit_link(@trip, "link-as-button ghost" ) %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
+  <% end %>
+  
+    <br><br>
+    <%= link_to  "<<", "#", class: "link-as-button ghost prev" %>
+    <%= link_to  ">>", "#", class: "link-as-button ghost next" %>
 
-  <br><br>
-  <%= link_to  "<<", "#", class: "link-as-button ghost prev" %>
-  <%= link_to  ">>", "#", class: "link-as-button ghost next" %>
 </section><!-- trips -->
 
 <script id="trip-show-template" type="text/x-handlebars-template">
@@ -61,10 +64,11 @@
   <p>{{trip.note}}</p>
 
   created on {{created_date}}
-  
-  <br><br>
-  <a class="link-as-button" href="/users/{{trip.user_id}}/trips/1/edit">Edit</a> <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/1">Delete</a>
 
+  {{#if <%= authorized?(@trip.user) %>}}
+    <br><br>
+    <a class="link-as-button ghost" href="/users/{{trip.user_id}}/trips/1/edit">Edit</a> <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/1">Delete</a>
+  {{/if}}
   <br><br>
   <a class="link-as-button ghost prev" href="#">&lt;&lt;</a>
   <a class="link-as-button ghost next" href="#">&gt;&gt;</a>

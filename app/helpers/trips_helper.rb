@@ -66,11 +66,11 @@ module TripsHelper
   end
 
   def trip_edit_link(trip, klass)
-    link_to "Edit", edit_user_trip_path(trip.user, trip), class: klass if authorized?(trip.user)
+    link_to "Edit", edit_user_trip_path(trip.user, trip), class: klass
   end
 
   def trip_delete_link(trip, klass)
-    link_to "Delete", trip, method: :delete, class: klass if authorized?(trip.user)
+    link_to "Delete", trip, method: :delete, class: klass
   end
 
 end
