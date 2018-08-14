@@ -129,7 +129,7 @@ class Trip {
     return showTemplate(context);
   }
 
-  renderPagerButtons() {
+  renderTripList() {
     return "<br>tripList: " + tripList;
   }
 }
@@ -155,11 +155,10 @@ const loadTripShow = (path = getPath()) => {
   console.log("show");
 
   const $container = $('section#trip-show-container');
-  $container.empty();
   $.getJSON(path, json => {
     const trip = Object.assign(new Trip, json);
-    $container.append(trip.renderShow());
-    $container.append(trip.renderPagerButtons());
+    $container.html(trip.renderShow());
+$container.append(trip.renderTripList());
   })
     .done(() => attachPageNavListeners())
 }
@@ -241,14 +240,17 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
 
 const loadTripsIndex = (path = getPath()) => {
   const $container = $('ul#trips-list');
-  $container.empty();
   tripList = [];
   
   $.getJSON(path, trips => {
     trips.forEach( response => {
       const trip = Object.assign(new Trip, response);
-      $container.append(trip.renderIndexLi());
       tripList.push(trip.id);
+      if(tripList.length === 1) {
+        $container.html(trip.renderIndexLi());
+      } else {
+        $container.append(trip.renderIndexLi());
+      }
     })
   })
     .done(() => attachTripIndexLiListeners())
