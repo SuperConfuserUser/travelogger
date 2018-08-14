@@ -72,6 +72,12 @@ class Trip {
     return this.listerizer(locations);
   }
 
+  locationsLabel() {
+    return this.locations.length > 1 ?
+      "Locations" :
+      "Location";
+  }
+
   categoriesList() {
     const categoryList = [];
     for(const category of this.categories) {
@@ -84,22 +90,20 @@ class Trip {
     return this.listerizer(categoryList);
   }
 
-  locationsLabel() {
-    return this.locations.length > 1 ?
-      "Locations" :
-      "Location";
-  }
-
   categoriesLabel() {
     return this.categories.length > 1 ?
       "Types" :
       "Type";
   }
 
+  getTemplate(label) {
+    return Handlebars.compile($(label).html());
+  }
+
   renderIndexLi() {
-    const template = Handlebars.compile($('#trip-index-li-template').html());
+    if(!indexTemplate) { indexTemplate = this.getTemplate("#trip-index-li-template"); }
     const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange() };
-    return template(context);
+    return indexTemplate(context);
   }
 
   renderShow() {
@@ -109,6 +113,9 @@ class Trip {
   }
 }
 
+// globals to store things
+
+let indexTemplate;
 
 // assign page specific behavior on document.ready
 
