@@ -119,7 +119,8 @@ class Trip {
 // globals to store things
 
 let indexTemplate,
-    showTemplate;
+    showTemplate,
+    tripList = [];
 
 // assign page specific behavior on document.ready
 
@@ -193,11 +194,13 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
 const loadTripsIndex = (path = getPath()) => {
   const $container = $('ul#trips-list');
   $container.empty();
-
+  tripList = [];
+  
   $.getJSON(path, trips => {
     trips.forEach( response => {
       const trip = Object.assign(new Trip, response);
       $container.append(trip.renderIndexLi());
+      tripList.push(trip.id);
     })
   }).done(() => attachTripIndexLiListeners())
 }
