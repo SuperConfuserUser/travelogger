@@ -1,12 +1,13 @@
 // javascript is super weird
 
-// the class/prototype
+// the CLASS/prototype
 
 class Trip {
   constructor() {
   }
 
-  // these would be great as app wide methods
+  // these would be great as APP wide methods
+
   capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
   }
@@ -41,7 +42,8 @@ class Trip {
   getTemplate(label) {
     return Handlebars.compile($(label).html());
   }
-  // end of app wide methods
+
+  // PROTOTYPE METHODS specific to trip, for now
 
   tripDateRange() {
     return this.end_date == null ?
@@ -134,42 +136,16 @@ class Trip {
   }
 }
 
-const startTripShow = () => {
-  if(tripList.length) {
-    loadTripShow();
-  } else {
-    getTripList();
-  }
-}
 
-const getTripList = () => {
-  console.log("list");
-  const path = window.location.pathname;
-  const listPath =  path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
-  $.getJSON(listPath, (trips) => {
-    tripList = trips.map(trip => trip.id);
-  }).done(() => loadTripShow())
-}
-
-const loadTripShow = (path = getPath()) => {
-  console.log("show");
-
-  const $container = $('section#trip-show-container');
-  $.getJSON(path, json => {
-    const trip = Object.assign(new Trip, json);
-    $container.html(trip.renderShow());
-$container.append(trip.renderTripList());
-  })
-    .done(() => attachPageNavListeners())
-}
-
-// globals to store things
+// GLOBALS to store things. there should be a better way v.v
 
 let indexTemplate,
     showTemplate,
     tripList = [];
 
-// assign page specific behavior on document.ready
+
+
+// assign PAGE specific behavior on document.ready
 
 $(() => {
   const page = $('section').attr('data-page');
@@ -182,7 +158,6 @@ $(() => {
       break;
     case 'trips-show':
       startTripShow();
-      // attachTripShowListeners();
       break;
     case 'trips-form':
       alert("I'm in " + page)
@@ -191,32 +166,14 @@ $(() => {
 })
 
 
-//play code 
-
-const attachListeners = () => {
-  $('#hide_this').on('click', () => hideWhenClicked('#hide_this'));
-  $('#test').on('click', runTest);
-}
-
-$(attachListeners);
-
-const hideWhenClicked = el => $(el).hide();
-
-function runTest() {
-  alert("clicked!");
-}
-
-// general
+// GENERAL
 
 const getPath = () => {
   return window.href;
 }
 
-const setPath = (path) => {
-  window.location.href = path.toString();
-}
 
-// index
+// INDEX
 
 const attachTripIndexFilterListeners = () => {
   filters().on('click', (e) => {
@@ -265,14 +222,39 @@ const attachTripIndexLiListeners = () => {
   })
 }
 
-// show
 
-const setTripShow = () => {
+// SHOW
+
+const startTripShow = () => {
+  if(tripList.length) {
+    loadTripShow();
+  } else {
+    getTripList();
+  }
+}
+
+const setTripShow = () => {  //dynamic rendering from another page
   $('section').attr('data-page','trips-show');
   $('section').attr('id', 'trip-show-container')
 }
 
+const getTripList = () => {
+  const path = window.location.pathname;
+  const listPath =  path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
+  $.getJSON(listPath, (trips) => {
+    tripList = trips.map(trip => trip.id);
+  }).done(() => loadTripShow())
+}
 
+const loadTripShow = (path = getPath()) => {
+  const $container = $('section#trip-show-container');
+  $.getJSON(path, json => {
+    const trip = Object.assign(new Trip, json);
+    $container.html(trip.renderShow());
+    // $container.append(trip.renderTripList());
+  })
+    .done(() => attachPageNavListeners())
+}
 
 const attachPageNavListeners = () => {
   console.log("page nav listeners")
@@ -283,4 +265,3 @@ const attachPageNavListeners = () => {
     loadTripShow(path);
   })
 }
-
