@@ -99,6 +99,19 @@ class Trip {
       "Type";
   }
 
+  pageNav() {
+    const current = tripList.indexOf(this.id);
+    let buttons = {}
+
+    if(current) {
+      buttons.prev = tripList[current - 1];
+    }
+    if(current < tripList.length - 1) {
+      buttons.next = tripList[current + 1];
+    }
+    return buttons;
+  }
+
   renderIndexLi() {
     if(!indexTemplate) { 
       indexTemplate = this.getTemplate("#trip-index-li-template"); 
@@ -111,12 +124,13 @@ class Trip {
     if(!showTemplate) {
       showTemplate = this.getTemplate('#trip-show-template');
     }
-    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel() };
+    const buttons = this.pageNav();
+    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel(), prevTrip: buttons.prev, nextTrip: buttons.next };
     return showTemplate(context);
   }
 
   renderPagerButtons() {
-    return "tripList: " + tripList;
+    return "<br>tripList: " + tripList;
   }
 }
 
