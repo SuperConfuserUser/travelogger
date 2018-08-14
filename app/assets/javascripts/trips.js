@@ -161,6 +161,7 @@ const loadTripShow = (path = getPath()) => {
     $container.append(trip.renderShow());
     $container.append(trip.renderPagerButtons());
   })
+    .done(() => attachPageNavListeners())
 }
 
 // globals to store things
@@ -271,11 +272,13 @@ const setTripShow = () => {
 
 
 
-const attachTripShowListeners = () => {
-  $('.prev, .next').on('click', function (e) {
+const attachPageNavListeners = () => {
+  console.log("page nav listeners")
+  $('a.prev, a.next').on('click', function (e) {
     e.preventDefault();
-    debugger
-    runTest();
+    const path = this.attributes.href.value;
+    console.log(path);
+    loadTripShow(path);
   })
 }
 
