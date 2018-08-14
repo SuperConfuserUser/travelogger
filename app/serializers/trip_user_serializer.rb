@@ -1,3 +1,3 @@
 class TripUserSerializer < ActiveModel::Serializer
-  attributes :username, :image, :tagline, :trips
+  attributes :username, :image, :tagline, :trip_count
 end
