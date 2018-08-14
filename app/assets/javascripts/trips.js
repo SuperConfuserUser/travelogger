@@ -80,18 +80,16 @@ class Trip {
 
   categoriesList() {
     const categoryList = [];
-    for(const category of this.categories) {
-      for(const tc of this.trip_categories) {
-        tc.category_id === category.id && tc.description ?
-          categoryList.push(this.capitalize(category.name) + ": " + tc.description + "") :
-          categoryList.push(this.capitalize(category.name));
-      }
+    for(const tc of this.trip_categories) {
+      tc.description ?
+        categoryList.push(this.capitalize(tc.category_name) + ": " + tc.description + "") :
+        categoryList.push(this.capitalize(tc.category_name));
     }
     return this.listerizer(categoryList);
   }
 
   categoriesLabel() {
-    return this.categories.length > 1 ?
+    return this.trip_categories.length > 1 ?
       "Types" :
       "Type";
   }
