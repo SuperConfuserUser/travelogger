@@ -55,7 +55,7 @@ class Trip {
   }
 
   userTripCount() {
-    const count = this.user.trips.length;
+    const count = this.user.trip_count;
     return count === 1 ?
       count + " Trip" :
       count + " Trips";
