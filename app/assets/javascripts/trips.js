@@ -202,7 +202,8 @@ const loadTripsIndex = (path = getPath()) => {
       $container.append(trip.renderIndexLi());
       tripList.push(trip.id);
     })
-  }).done(() => attachTripIndexLiListeners())
+  })
+    .done(() => attachTripIndexLiListeners())
 }
 
 const attachTripIndexLiListeners = () => {
@@ -237,4 +238,16 @@ const attachTripShowListeners = () => {
     debugger
     runTest();
   })
+}
+
+const getTripList = () => { 
+  if(tripList.length === 0) {
+    const path = window.location.pathname;
+    const listPath = path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
+    $.getJSON(listPath, trips => {
+      tripList = trips.map(trip => trip.id);
+    })
+      .done(()=> { //next thing
+      })
+  }
 }
