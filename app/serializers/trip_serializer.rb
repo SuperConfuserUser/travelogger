@@ -1,6 +1,5 @@
 class TripSerializer < ActiveModel::Serializer
   belongs_to :user, serializer: TripUserSerializer
-  has_many :categories
   has_many :trip_categories, serializer: TripTripCategorySerializer
   has_many :locations, serializer: TripLocationsExplicitSerializer
   
