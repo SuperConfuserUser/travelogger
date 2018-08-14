@@ -114,6 +114,39 @@ class Trip {
     const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel() };
     return showTemplate(context);
   }
+
+  renderPagerButtons() {
+    return "tripList: " + tripList;
+  }
+}
+
+const startTripShow = () => {
+  if(tripList.length) {
+    loadTripShow();
+  } else {
+    getTripList();
+  }
+}
+
+const getTripList = () => {
+  console.log("list");
+  const path = window.location.pathname;
+  const listPath =  path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
+  $.getJSON(listPath, (trips) => {
+    tripList = trips.map(trip => trip.id);
+  }).done(() => loadTripShow())
+}
+
+const loadTripShow = (path = getPath()) => {
+  console.log("show");
+
+  const $container = $('section#trip-show-container');
+  $container.empty();
+  $.getJSON(path, json => {
+    const trip = Object.assign(new Trip, json);
+    $container.append(trip.renderShow());
+    $container.append(trip.renderPagerButtons());
+  })
 }
 
 // globals to store things
@@ -134,7 +167,7 @@ $(() => {
       loadTripsIndex();
       break;
     case 'trips-show':
-      loadTripShow();
+      startTripShow();
       // attachTripShowListeners();
       break;
     case 'trips-form':
@@ -222,17 +255,9 @@ const setTripShow = () => {
   $('section').attr('id', 'trip-show-container')
 }
 
-const loadTripShow = (path = getPath()) => {
-  const $container = $('section#trip-show-container');
-  $container.empty();
-  $.getJSON(path, json => {
-      const trip = Object.assign(new Trip, json);
-      $container.append(trip.renderShow());
-  })
-}
+
 
 const attachTripShowListeners = () => {
-
   $('.prev, .next').on('click', function (e) {
     e.preventDefault();
     debugger
@@ -240,14 +265,3 @@ const attachTripShowListeners = () => {
   })
 }
 
-const getTripList = () => { 
-  if(tripList.length === 0) {
-    const path = window.location.pathname;
-    const listPath = path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
-    $.getJSON(listPath, trips => {
-      tripList = trips.map(trip => trip.id);
-    })
-      .done(()=> { //next thing
-      })
-  }
-}
