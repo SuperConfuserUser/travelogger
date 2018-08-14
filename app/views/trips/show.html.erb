@@ -1,38 +1,39 @@
 <section class="trips" data-page="trips-show" id="trip-show-container">
 
-  <h1><%= @trip.name %></h1>
+  <!-- <h1><% @trip.name %></h1>
 
-  <%= render 'users/user_avatar_link', user: @trip.user, klass: "list-avatar" %>
+  <% render 'users/user_avatar_link', user: @trip.user, klass: "list-avatar" %>
 
   <div>
-      <%= render 'users/user_name_link', user: @trip.user, klass: "camo-link" %>
-       <%= user_trips_count_link(@trip.user)  %>
+      <% render 'users/user_name_link', user: @trip.user, klass: "camo-link" %>
+       <% user_trips_count_link(@trip.user)  %>
       <br>
-      <%= user_tagline(@trip.user) %>
+      <% user_tagline(@trip.user) %>
   </div>
   <br>
 
-  <%= trip_location_label(@trip) %>: <%= trip_location_list(@trip) %>
+  <% trip_location_label(@trip) %>: <% trip_location_list(@trip) %>
   <br>
 
-  Date: <%= trip_date_range(@trip) %>
+  Date: <% trip_date_range(@trip) %>
   <br>
 
-  <%= trip_type_label(@trip) %>: <%= trip_type_list(@trip) %>
+  <% trip_type_label(@trip) %>: <% trip_type_list(@trip) %>
   <br><br>
 
-  <p><%= @trip.note %></p>
+  <p><% @trip.note %></p>
 
-  created on <%= date_short(@trip.created_at) %>
+  created on <% date_short(@trip.created_at) %>
   
   <% if authorized?(@trip.user) %>
     <br><br>
-    <%= trip_edit_link(@trip, "link-as-button ghost" ) %> <%= trip_delete_link(@trip, "link-as-button ghost") %>
+    <% trip_edit_link(@trip, "link-as-button ghost" ) %> <% trip_delete_link(@trip, "link-as-button ghost") %>
   <% end %>
   
     <br><br>
-    <%= link_to  "<<", "#", class: "link-as-button ghost prev" %>
-    <%= link_to  ">>", "#", class: "link-as-button ghost next" %>
+    <% link_to  "<<", "#", class: "link-as-button ghost prev" %>
+    <% link_to  ">>", "#", class: "link-as-button ghost next" %> -->
+    
 
 </section><!-- trips -->
 
@@ -70,6 +71,19 @@
     <a class="link-as-button ghost" href="/users/{{trip.user_id}}/trips/1/edit">Edit</a> <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/1">Delete</a>
   {{/if}}
   <br><br>
-  <a class="link-as-button ghost prev" href="#">&lt;&lt;</a>
-  <a class="link-as-button ghost next" href="#">&gt;&gt;</a>
+  {{#if <%= nested? %>}}
+    {{#if prevTrip}}
+      <a class="link-as-button ghost prev" href="/users/{{trip.user_id}}/trips/{{prevTrip}}">&lt;&lt;</a>
+    {{/if}}
+    {{#if nextTrip}}
+      <a class="link-as-button ghost next" href="/users/{{trip.user_id}}/trips/{{nextTrip}}">&gt;&gt;</a>
+    {{/if}}
+  {{else}}
+    {{#if prevTrip}}
+      <a class="link-as-button ghost prev" href="/trips/{{prevTrip}}">&lt;&lt;</a>
+    {{/if}}
+    {{#if nextTrip}}
+      <a class="link-as-button ghost next" href="/trips/{{nextTrip}}">&gt;&gt;</a>
+    {{/if}}
+  {{/if}}
 </script>

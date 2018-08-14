@@ -147,6 +147,15 @@ function runTest() {
   alert("clicked!");
 }
 
+// general
+
+const getPath = () => {
+  return window.href;
+}
+
+const setPath = (path) => {
+  window.location.href = path.toString();
+}
 
 // index
 
@@ -168,10 +177,6 @@ const setTripCurrentFilter = (current = 'a#default-selection') => {
     $(filter).removeClass("current")
   }
   $(current).addClass("current")
-}
-
-const getPath = () => {
-  return window.location.pathname + window.location.search;
 }
 
 const loadTripsIndex = (path = getPath()) => {
