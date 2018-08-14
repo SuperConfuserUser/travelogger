@@ -127,7 +127,7 @@ $(() => {
       loadTripsIndex();
       break;
     case 'trips-show':
-      loadTripsShow();
+      loadTripShow();
       // attachTripShowListeners();
       break;
     case 'trips-form':
@@ -164,17 +164,17 @@ const setPath = (path) => {
 
 // index
 
-const filters = () => {
-  return $('a.trip-category');
-}
-
 const attachTripIndexListeners = () => {
-    filters().on('click', function (e) {  //using old skool function for specific this binding
+  filters().on('click', function (e) {  //using old skool function for specific this binding
     const filterPath = this.attributes.href.value;
     e.preventDefault();
     setTripCurrentFilter(this)
     loadTripsIndex(filterPath);
   })
+}
+
+const filters = () => {
+  return $('a.trip-category');
 }
 
 const setTripCurrentFilter = (current = 'a#default-selection') => {
@@ -198,20 +198,25 @@ const loadTripsIndex = (path = getPath()) => {
 
 // show
 
+const setTripShow = () => {
+  $('section').attr('data-page','trips-show');
+  $('section').attr('id', 'trip-show-container')
+}
+
+const loadTripShow = (path = getPath()) => {
+  const $container = $('section#trip-show-container');
+  $container.empty();
+  $.getJSON(path, json => {
+      const trip = Object.assign(new Trip, json);
+      $container.append(trip.renderShow());
+  })
+}
+
 const attachTripShowListeners = () => {
 
   $('.prev, .next').on('click', function (e) {
     e.preventDefault();
     debugger
     runTest();
-  })
-}
-
-const loadTripsShow = (path = getPath()) => {
-  const $container = $('section#trip-show-container');
-  $container.empty();
-  $.getJSON(path, json => {
-      const trip = Object.assign(new Trip, json);
-      $container.append(trip.renderShow());
   })
 }
