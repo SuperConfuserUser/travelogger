@@ -174,7 +174,7 @@ const attachTripIndexFilterListeners = () => {
   filters().on('click', (e) => {
     const filterPath = e.target.attributes.href.value;
     e.preventDefault();
-    setTripCurrentFilter(e.target)
+    setTripCurrentFilter(e.target);
     loadTripsIndex(filterPath);
   })
 }
