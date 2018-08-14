@@ -193,7 +193,16 @@ const loadTripsIndex = (path = getPath()) => {
       const trip = Object.assign(new Trip, response);
       $container.append(trip.renderIndexLi());
     })
-  })  
+  }).done(() => attachTripIndexLiListeners())
+}
+
+const attachTripIndexLiListeners = () => {
+  $('a.list-title').on('click', (e) => {
+    const path = e.target.pathname;
+    e.preventDefault();
+    setTripShow();
+    loadTripShow(path);
+  })
 }
 
 // show
