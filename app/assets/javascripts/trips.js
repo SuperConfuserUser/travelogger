@@ -179,8 +179,8 @@ const loadTripsIndex = (path = getPath()) => {
   $container.empty();
 
   $.getJSON(path, trips => {
-    trips.forEach( json => {
-      const trip = Object.assign(new Trip, json);
+    trips.forEach( response => {
+      const trip = Object.assign(new Trip, response);
       $container.append(trip.renderIndexLi());
     })
   })  
