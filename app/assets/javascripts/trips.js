@@ -6,7 +6,7 @@ class Trip {
   constructor() {
   }
 
-  // these would ideally be in app.js
+  // these would be great as app wide methods
   capitalize(str) {
     return str[0].toUpperCase() + str.slice(1);
   }
@@ -37,6 +37,11 @@ class Trip {
       date.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) : // Mon 1
       date.toLocaleDateString('en-us', { month: 'short', day: 'numeric', year: 'numeric' }); //Mon 1, 2000
   }
+
+  getTemplate(label) {
+    return Handlebars.compile($(label).html());
+  }
+  // end of app wide methods
 
   tripDateRange() {
     return this.end_date == null ?
@@ -94,12 +99,10 @@ class Trip {
       "Type";
   }
 
-  getTemplate(label) {
-    return Handlebars.compile($(label).html());
-  }
-
   renderIndexLi() {
-    if(!indexTemplate) { indexTemplate = this.getTemplate("#trip-index-li-template"); }
+    if(!indexTemplate) { 
+      indexTemplate = this.getTemplate("#trip-index-li-template"); 
+    }
     const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange() };
     return indexTemplate(context);
   }
