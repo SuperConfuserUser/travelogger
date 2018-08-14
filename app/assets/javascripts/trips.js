@@ -105,15 +105,18 @@ class Trip {
   }
 
   renderShow() {
-    const template = Handlebars.compile($('#trip-show-template').html());
+    if(!showTemplate) {
+      showTemplate = this.getTemplate('#trip-show-template');
+    }
     const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel() };
-    return template(context);
+    return showTemplate(context);
   }
 }
 
 // globals to store things
 
-let indexTemplate;
+let indexTemplate,
+    showTemplate;
 
 // assign page specific behavior on document.ready
 
