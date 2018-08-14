@@ -122,7 +122,7 @@ $(() => {
 
   switch(page) {
     case 'trips-index':
-      attachTripIndexListeners();
+      attachTripIndexFilterListeners();
       setTripCurrentFilter();
       loadTripsIndex();
       break;
@@ -164,11 +164,11 @@ const setPath = (path) => {
 
 // index
 
-const attachTripIndexListeners = () => {
-  filters().on('click', function (e) {  //using old skool function for specific this binding
-    const filterPath = this.attributes.href.value;
+const attachTripIndexFilterListeners = () => {
+  filters().on('click', (e) => {
+    const filterPath = e.target.attributes.href.value;
     e.preventDefault();
-    setTripCurrentFilter(this)
+    setTripCurrentFilter(e.target)
     loadTripsIndex(filterPath);
   })
 }
