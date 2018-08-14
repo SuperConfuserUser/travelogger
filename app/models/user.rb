@@ -42,5 +42,8 @@ class User < ApplicationRecord
 
   # CUSTOM
 
+  def trip_count
+    self.trips.count
+  end
   
 end
