@@ -1,6 +1,17 @@
-// javascript is super weird
+/* javascript is super weird
 
-// the CLASS/prototype
+1. Trip class (prototype)
+2. Global variables
+3. Trip page assignment
+4. General methods
+5. Index
+6. Show
+7. Form
+
+*/
+
+
+// 1. the CLASS/prototype
 
 class Trip {
   constructor() {
@@ -137,7 +148,7 @@ class Trip {
 }
 
 
-// GLOBALS to store things. there should be a better way v.v
+// 2. GLOBALS to store things. there should be a better way v.v
 
 let indexTemplate,
     showTemplate,
@@ -145,7 +156,7 @@ let indexTemplate,
 
 
 
-// assign PAGE specific behavior on document.ready
+// 3. assign PAGE specific behavior on document.ready
 
 $(() => {
   const page = $('section').attr('data-page');
@@ -167,7 +178,7 @@ $(() => {
 })
 
 
-// GENERAL
+// 4. GENERAL
 
 const getPath = () => {
   return window.href;
@@ -178,7 +189,7 @@ const setPath = (path) => {
 }
 
 
-// INDEX
+// 5. INDEX
 
 const attachTripIndexFilterListeners = () => {
   filters().on('click', (e) => {
@@ -232,7 +243,7 @@ const attachTripIndexLiListeners = () => {
 }
 
 
-// SHOW
+// 6. SHOW
 
 const startTripShow = () => {
   if(tripList.length) {
@@ -292,7 +303,7 @@ const renderAuthorizedContainer = (tripId, userId) => {
 }
 
 
-// FORM
+// 7. FORM
 
 const attachTripSubmit = () => {
   $('form#new_trip').on('submit', (e) => {
