@@ -274,25 +274,18 @@ const getTripList = (callback = loadTripShow) => {
   }).done(() => callback())
 }
 
-const loadTripShow = (path = getPath()) => {
+const loadTripShow = (path = getPath(), tripData) => {
   const $container = $('section#trip-show-container');
   setPath(path);
-  $.getJSON(path, json => {
-    const trip = Object.assign(new Trip, json);
+
+  if(!tripData) {
+    $.getJSON(path, json => tripData = json)
+      .done(() => loadTripShow(path, tripData))
+  } else {
+    const trip = Object.assign(new Trip, tripData);
     $container.html(trip.renderShow());
     renderAuthorizedContainer(trip.id, trip.user_id);
-  })
-    .done(() => attachPageNavListeners())
-}
-
-const attachPageNavListeners = () => {
-  $('a.prev, a.next').on('click', function (e) {
-    e.preventDefault();
-    const path = this.attributes.href.value;
-    console.log(path);
-    loadTripShow(path);
-  })
-} }).done(() => callback())
+    attachPageNavListeners();
 }
 
 const loadTripShow = (path = getPath()) => {
