@@ -161,32 +161,10 @@ $(() => {
       break;
     case 'trips-form':
       attachTripSubmit();
+      attachAddLocation();
       break;
   }
 })
-
-const attachTripSubmit = () => {
-  $('form#new_trip').on('submit', (e) => {
-    e.preventDefault();
-    
-    $.ajax({
-      type: "POST",
-      url: e.target.action,
-      data: $(e.target).serialize(),
-      dataType: "json"
-    })
-      .done((trip) => {
-        const path =  `\\users\\${trip.user_id}\\trips\\${trip.id}`;
-        setTripShow();
-        loadTripShow(path, trip);
-      })
-      .fail((response) => {
-        $('section.trips').html(response.responseText);
-        attachTripSubmit();   
-        // need to reset bc multi on(submits) don't work bc of the way it's attached?
-      })    
-  })
-}
 
 
 // GENERAL
@@ -311,4 +289,40 @@ const renderAuthorizedContainer = (tripId, userId) => {
     <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/${tripId}">Delete</a> 
     `);
   }
+}
+
+
+// FORM
+
+const attachTripSubmit = () => {
+  $('form#new_trip').on('submit', (e) => {
+    e.preventDefault();
+    
+    $.ajax({
+      type: "POST",
+      url: e.target.action,
+      data: $(e.target).serialize(),
+      dataType: "json"
+    })
+      .done((trip) => {
+        const path =  `\\users\\${trip.user_id}\\trips\\${trip.id}`;
+        setTripShow();
+        loadTripShow(path, trip);
+      })
+      .fail((response) => {
+        $('section.trips').html(response.responseText);
+        attachTripSubmit();
+        attachAddLocation();
+        // need to reset bc multi on(submits) don't work bc of the way it's attached?
+      })    
+  })
+}
+
+const attachAddLocation = () => {
+  $('button#add-location').on('click', (e) => {
+    e.preventDefault();
+    const i = $('div#locations input').length,
+          html = `<input placeholder="Location" type="text" name="trip[locations_attributes][${i}][name]" id="trip_locations_attributes_${i}_name">`;
+    $('div#locations').append(html);
+  })
 }

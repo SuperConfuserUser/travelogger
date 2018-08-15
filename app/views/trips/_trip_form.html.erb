@@ -13,13 +13,15 @@
     
       <!-- how to call only the first field or makes sure it runs once -->
       <!-- name = "trip[locations_attributes][0][name]" id="trip_locations_attributes_0_name" -->
+      <div id="locations">
       <%= f.fields_for :locations do |location_form| %>
         <%= add_error_div(trip.errors[:locations].any?) do %>
           <%= location_form.text_field :name, placeholder: "Location" %>
         <% end %>
       <% end %>
-
-      <%= f.submit "+", class: "circle-button" %>
+      </div>
+      <!-- add = back in ... <% f.submit "+", class: "circle-button" %> -->
+      <button id="add-location" class="circle-button">+</button>
       <%= error_message("Location", trip.errors[:locations]) %>
       <br>
 
