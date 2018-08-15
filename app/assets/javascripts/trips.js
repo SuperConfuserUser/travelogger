@@ -178,6 +178,9 @@ const attachTripSubmit = () => {
       .done((trip) => {
       })
       .fail((response) => {
+        $('section.trips').html(response.responseText);
+        attachTripSubmit();   
+        // need to reset bc multi on(submits) don't work bc of the way it's attached?
       })    
   })
 }

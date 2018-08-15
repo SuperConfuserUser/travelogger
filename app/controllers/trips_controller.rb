@@ -32,7 +32,7 @@ class TripsController < ApplicationController
 
     if added_location? || !@trip.save
       @trip.locations.build if added_location?
-      render :new
+      render :new, layout: false
     else
       render json: @trip, status: 201
     end
