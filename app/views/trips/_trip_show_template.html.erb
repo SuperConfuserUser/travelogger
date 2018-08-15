@@ -27,7 +27,7 @@
 
   created on {{created_date}}
 
-  <div id="authorizedContainer" data-user="<%= current_user.id %>"></div>
+  <div id="authorizedContainer" data-user="<%= current_user.id if logged_in? %>"></div>
 
   <br><br>
   {{#if <%= nested? %>}}
