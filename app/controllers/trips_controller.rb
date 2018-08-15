@@ -34,7 +34,7 @@ class TripsController < ApplicationController
       @trip.locations.build if added_location?
       render :new
     else
-      redirect_to user_trip_path(@trip.user, @trip)
+      render json: @trip, status: 201
     end
   end
 

@@ -160,10 +160,27 @@ $(() => {
       startTripShow();
       break;
     case 'trips-form':
-      alert("I'm in " + page)
+      attachTripSubmit();
       break;
   }
 })
+
+const attachTripSubmit = () => {
+  $('form#new_trip').on('submit', (e) => {
+    e.preventDefault();
+
+    $.ajax({
+      type: "POST",
+      url: e.target.action,
+      data: $(e.target).serialize(),
+      dataType: "json"
+    })
+      .done((trip) => {
+      })
+      .fail((response) => {
+      })    
+  })
+}
 
 
 // GENERAL
