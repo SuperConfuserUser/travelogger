@@ -49,11 +49,9 @@
       <%= error_message("Categories", trip.errors[:categories]) %>
       <br><br>
 
-      <a id="test">test</a>
       <!-- trip.trip_categories.build(category_id: <pull from data-category_id)>, description: <value from the text input>).save -->
 
-      <h1>Home Page</h1>
-      <a href="#" id="hide_this">Click to Hide Me</a>
+      
       <!-- 
         TODO:
         allow user to create custom category use find or create in the text field, this shouldn't be another checkbox. it's a nested form.
@@ -75,7 +73,9 @@
 
     <% end %>
 
-  </div>
+  </div><!-- form -->
 </section><!-- trips -->
+
+<%= render 'trip_show_template' %>
 
   
