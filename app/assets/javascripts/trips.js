@@ -22,8 +22,8 @@ class Trip {
   }
 
   longDate(sysDate) {
-    const currentYear = (new Date).getFullYear();
-    const date = new Date(sysDate);
+    const currentYear = (new Date).getFullYear(),
+          date = new Date(sysDate);
 
     return date.getFullYear() === currentYear ?
       date.toLocaleDateString('en-us', { month: 'long', day: 'numeric' }) : // Month 1
@@ -31,8 +31,8 @@ class Trip {
   }
 
   shortDate(sysDate) {
-    const currentYear = (new Date).getFullYear();
-    const date = new Date(sysDate);
+    const currentYear = (new Date).getFullYear(),
+          date = new Date(sysDate);
 
     return date.getFullYear() === currentYear ?
       date.toLocaleDateString('en-us', { month: 'short', day: 'numeric' }) : // Mon 1
@@ -126,8 +126,8 @@ class Trip {
     if(!showTemplate) {
       showTemplate = this.getTemplate('#trip-show-template');
     }
-    const buttons = this.pageNav();
-    const context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel(), prevTrip: buttons.prev, nextTrip: buttons.next };
+    const buttons = this.pageNav(),
+          context = { trip: this, userImage: this.userImage(), locations: this.locationList(), date: this.tripDateRange(), categories: this.categoriesList(), created_date: this.createdDate(), userTripCount: this.userTripCount(), userTagline: this.userTagline(), locationsLabel: this.locationsLabel(), categoriesLabel: this.categoriesLabel(), prevTrip: buttons.prev, nextTrip: buttons.next };
     return showTemplate(context);
   }
 
@@ -205,6 +205,9 @@ const loadTripsIndex = (path = getPath()) => {
   tripList = [];
   
   $.getJSON(path, trips => {
+    if(!trips.length) {
+      $container.empty();
+    } 
     trips.forEach( response => {
       const trip = Object.assign(new Trip, response);
       tripList.push(trip.id);
