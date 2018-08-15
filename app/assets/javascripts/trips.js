@@ -172,12 +172,17 @@ const getPath = () => {
   return window.href;
 }
 
+const setPath = (path) => {
+  history.pushState("", "", path);
+}
+
 
 // INDEX
 
 const attachTripIndexFilterListeners = () => {
   filters().on('click', (e) => {
     const filterPath = e.target.attributes.href.value;
+    setPath(filterPath);
     e.preventDefault();
     setTripCurrentFilter(e.target);
     loadTripsIndex(filterPath);
@@ -248,6 +253,7 @@ const getTripList = () => {
 
 const loadTripShow = (path = getPath()) => {
   const $container = $('section#trip-show-container');
+  setPath(path);
   $.getJSON(path, json => {
     const trip = Object.assign(new Trip, json);
     $container.html(trip.renderShow());
