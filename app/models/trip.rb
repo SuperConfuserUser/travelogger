@@ -1,9 +1,9 @@
 class Trip < ApplicationRecord
   belongs_to :user
-  has_many :trip_categories
+  has_many :trip_categories, :dependent => :destroy
   has_many :categories, through: :trip_categories
   has_many :entries
-  has_many :trip_locations
+  has_many :trip_locations, :dependent => :destroy
   has_many :locations, through: :trip_locations
 
   accepts_nested_attributes_for :locations, :allow_destroy => true 
