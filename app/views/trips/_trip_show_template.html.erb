@@ -27,10 +27,8 @@
 
   created on {{created_date}}
 
-  {{#if <%= authorized?(user) %>}}
-    <br><br>
-    <a class="link-as-button ghost" href="/users/{{trip.user_id}}/trips/1/edit">Edit</a> <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/1">Delete</a>
-  {{/if}}
+  <div id="authorizedContainer" data-user="<%= current_user.id %>"></div>
+
   <br><br>
   {{#if <%= nested? %>}}
     {{#if prevTrip}}

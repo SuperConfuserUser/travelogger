@@ -260,17 +260,49 @@ const loadTripShow = (path = getPath()) => {
   $.getJSON(path, json => {
     const trip = Object.assign(new Trip, json);
     $container.html(trip.renderShow());
-    // $container.append(trip.renderTripList());
+    renderAuthorizedContainer(trip.id, trip.user_id);
   })
     .done(() => attachPageNavListeners())
 }
 
 const attachPageNavListeners = () => {
-  console.log("page nav listeners")
   $('a.prev, a.next').on('click', function (e) {
     e.preventDefault();
     const path = this.attributes.href.value;
     console.log(path);
     loadTripShow(path);
   })
+} }).done(() => callback())
+}
+
+const loadTripShow = (path = getPath()) => {
+  const $container = $('section#trip-show-container');
+  setPath(path);
+  $.getJSON(path, json => {
+    const trip = Object.assign(new Trip, json);
+    $container.html(trip.renderShow());
+    renderAuthorizedContainer(trip.id, trip.user_id);
+  })
+    .done(() => attachPageNavListeners())
+}
+
+const attachPageNavListeners = () => {
+  $('a.prev, a.next').on('click', function (e) {
+    e.preventDefault();
+    const path = this.attributes.href.value;
+    console.log(path);
+    loadTripShow(path);
+  })
+}
+
+const renderAuthorizedContainer = (tripId, userId) => {
+  const $container = $('div#authorizedContainer'),
+        currentUser = $container.attr('data-user');
+  if(userId.toString() === currentUser) {
+    $container.html(`
+    <br><br>
+    <a class="link-as-button ghost" href="/users/${userId}/trips/${tripId}/edit">Edit</a>
+    <a class="link-as-button ghost" rel="nofollow" data-method="delete" href="/trips/${tripId}">Delete</a> 
+    `);
+  }
 }
