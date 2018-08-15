@@ -168,7 +168,7 @@ $(() => {
 const attachTripSubmit = () => {
   $('form#new_trip').on('submit', (e) => {
     e.preventDefault();
-
+    
     $.ajax({
       type: "POST",
       url: e.target.action,
@@ -176,6 +176,9 @@ const attachTripSubmit = () => {
       dataType: "json"
     })
       .done((trip) => {
+        const path =  `\\users\\${trip.user_id}\\trips\\${trip.id}`;
+        setTripShow();
+        loadTripShow(path, trip);
       })
       .fail((response) => {
         $('section.trips').html(response.responseText);
@@ -286,17 +289,7 @@ const loadTripShow = (path = getPath(), tripData) => {
     $container.html(trip.renderShow());
     renderAuthorizedContainer(trip.id, trip.user_id);
     attachPageNavListeners();
-}
-
-const loadTripShow = (path = getPath()) => {
-  const $container = $('section#trip-show-container');
-  setPath(path);
-  $.getJSON(path, json => {
-    const trip = Object.assign(new Trip, json);
-    $container.html(trip.renderShow());
-    renderAuthorizedContainer(trip.id, trip.user_id);
-  })
-    .done(() => attachPageNavListeners())
+  }
 }
 
 const attachPageNavListeners = () => {
