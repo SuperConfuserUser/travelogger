@@ -246,12 +246,12 @@ const setTripShow = () => {  //dynamic rendering from another page
   $('section').attr('id', 'trip-show-container')
 }
 
-const getTripList = () => {
-  const path = window.location.pathname;
-  const listPath =  path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
+const getTripList = (callback = loadTripShow) => {
+  const path = window.location.pathname,
+        listPath =  path.substring(0, path.lastIndexOf("/")) //cuts off trip id for index path
   $.getJSON(listPath, (trips) => {
     tripList = trips.map(trip => trip.id);
-  }).done(() => loadTripShow())
+  }).done(() => callback())
 }
 
 const loadTripShow = (path = getPath()) => {
