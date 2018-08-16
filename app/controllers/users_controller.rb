@@ -32,13 +32,12 @@ class UsersController < ApplicationController
   def edit
   end
 
-  def update
+  def update 
     @user.update(user_params)
-    
+  
     if @user.save
       redirect_to user_path(@user)
     else
-      @user = User.find_by(id: params[:id]) if form_reset?
       render :edit
     end
   end
@@ -63,9 +62,4 @@ class UsersController < ApplicationController
   def authorized_validation(user = set_user)
     redirect_to user_path(@user), alert: "Not allowed." and return if !authorized?(user) 
   end
-
-  def form_reset?
-    params[:commit] == "Reset"
-  end
-  
 end
