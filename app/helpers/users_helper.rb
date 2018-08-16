@@ -16,8 +16,8 @@ module UsersHelper
     user.new_record? ? "Password Confirm" : "New Password Confirm"
   end
 
-  def user_form_reset_button(form, user)
-    form.submit "Reset", class: "ghost" if user.persisted?
+  def user_form_reset_button(user)
+    link_to "Reset", edit_user_path(user), class: "link-as-button ghost" if user.persisted?
   end
 
   #INDEX and SHOW
