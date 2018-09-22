@@ -198,7 +198,60 @@ const attachTripIndexFilterListeners = () => {
     e.preventDefault();
     setTripCurrentFilter(e.target);
     loadTripsIndex(filterPath);
+    console.log("filters");
   })
+  attachTripAlphabetizeFilterListener();
+}
+
+const attachTripAlphabetizeFilterListener = () => {
+  $('a#alphabetize').on('click', (e) => {
+    e.preventDefault();
+    loadTripAlphabetize();
+  })
+}
+
+const loadTripAlphabetize = (path = getPath()) => {
+  const $container = $('ul#trips-list');
+  let tripList = [];
+  let tripObjects = [];
+  
+  $.getJSON(path, trips => {
+    $container.empty();
+   
+    trips.forEach( response => {
+      const trip = Object.assign(new Trip, response);
+      tripObjects.push(trip);
+      // $container.append(trip.renderIndexLi());
+    })
+
+    tripObjects = sortTripObjects(tripObjects);
+
+    tripObjects.forEach( trip => {
+      tripList.push(trip.id);
+      $container.append(trip.renderIndexLi());
+    })
+    
+  })
+    .done(() => {
+      attachTripIndexLiListeners();
+      // attachFormLinkListener();
+    })
+}
+
+const sortTripObjects = (list) => {
+  return list.sort(function(a, b) {
+    var nameA = a.name.toUpperCase(); // ignore upper and lowercase
+    var nameB = b.name.toUpperCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+  
+    // names must be equal
+    return 0;
+  });
 }
 
 const filters = () => {
