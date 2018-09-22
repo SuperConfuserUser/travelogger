@@ -7,6 +7,9 @@
     <%= link_to "All", trips_all_link(@user), class: "trip-category", id: "default-selection" %>
 
     <%= render collection: @categories, partial: 'trips/trip_category', as: :category, locals: {user: @user} %>
+
+    <a id="alphabetize" class="trip-category" href="/trips">Alphabetize</a>
+    
   </div><!-- trip-navigation -->
   
   <!-- <ul>
@@ -35,3 +38,4 @@
 </script>
 
 <%= render 'trip_show_template' %>
+<!-- <%= render 'trip_form_template' %> -->
