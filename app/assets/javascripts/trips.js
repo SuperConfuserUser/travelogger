@@ -230,7 +230,10 @@ const loadTripsIndex = (path = getPath()) => {
       }
     })
   })
-    .done(() => attachTripIndexLiListeners())
+    .done(() => {
+      attachTripIndexLiListeners();
+      // attachFormLinkListener();
+    })
 }
 
 const attachTripIndexLiListeners = () => {
@@ -285,7 +288,6 @@ const attachPageNavListeners = () => {
   $('a.prev, a.next').on('click', function (e) {
     e.preventDefault();
     const path = this.attributes.href.value;
-    console.log(path);
     loadTripShow(path);
   })
 }
@@ -304,6 +306,32 @@ const renderAuthorizedContainer = (tripId, userId) => {
 
 
 // 7. FORM
+const attachFormLinkListener = (link = 'a#new-trip') => {   
+  $(link).on('click', function (e) {
+    e.preventDefault();
+    const path = this.attributes.href.value;
+    console.log("boop");
+    setPath(path);
+    setTripForm();
+    loadTripForm();
+  })
+}
+
+const setTripForm = () => {  //dynamic rendering from another page
+  $('section').attr('data-page','trips-form');
+  $('section').attr('id', 'trip-form-container');
+}
+
+const loadTripForm = () => {
+  const $container = $('section#trip-form-container');
+  $container.empty();
+  $container.html(formTemplate);
+  // attachTripSubmit();
+  // attachAddLocation();
+}
+
+const formTemplate =  `whee`;
+
 
 const attachTripSubmit = () => {
   $('form#new_trip').on('submit', (e) => {
